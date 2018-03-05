@@ -1,5 +1,5 @@
 ﻿#include <boss.hpp>
-#include "r.hpp"
+#include "resource.hpp"
 
 #include <format/boss_bmp.hpp>
 #include <format/boss_png.hpp>
@@ -8,17 +8,28 @@
 
 namespace BOSS
 {
+    class BoolClass
+    {
+    public:
+        BoolClass() {mFlag = false;}
+        ~BoolClass() {}
+    public:
+        bool mFlag;
+    };
     static Map<Image> gImageMap;
+    static Map<BoolClass> gExistMap;
     static String gAtlasDir;
 
     R::R(chars name)
     {
         mImage = gImageMap.Access(name);
+        bool& Exist = gExistMap(name).mFlag;
         if(!mImage)
         {
             mImage = &gImageMap(name);
             if(!mImage->SetName(gAtlasDir + name).Load())
             {
+                Exist = false;
                 id_asset_read PngAsset = Asset::OpenForRead(gAtlasDir + "noimg.png");
                 const sint32 PngSize = Asset::Size(PngAsset);
                 buffer PngBuffer = Buffer::Alloc(BOSS_DBG PngSize);
@@ -27,7 +38,9 @@ namespace BOSS
                 mImage->LoadBitmap(Png().ToBmp((bytes) PngBuffer, true));
                 Buffer::Free(PngBuffer);
             }
+            else Exist = true;
         }
+        mExist = Exist;
     }
 
     R::~R()

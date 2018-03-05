@@ -1,7 +1,7 @@
 ﻿#include <boss.hpp>
 #include "blocks.hpp"
 
-#include <r.hpp>
+#include <resource.hpp>
 
 ZAY_DECLARE_VIEW_CLASS("blocksView", blocksData)
 

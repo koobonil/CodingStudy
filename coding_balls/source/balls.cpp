@@ -1,7 +1,7 @@
 ﻿#include <boss.hpp>
 #include "balls.hpp"
 
-#include <r.hpp>
+#include <resource.hpp>
 
 ZAY_DECLARE_VIEW_CLASS("ballsView", ballsData)
 
@@ -70,11 +70,19 @@ ZAY_VIEW_API OnNotify(chars sender, chars topic, id_share in, id_cloned_share* o
 
 ZAY_VIEW_API OnGesture(GestureType type, sint32 x, sint32 y)
 {
+    const Color BallColor[4] = {
+        Color(255, 0, 0, 128),
+        Color(0, 0, 255, 128),
+        Color(255, 255, 0, 128),
+        Color(0, 255, 0, 128)};
+
     if(type == GT_Pressed)
     {
+        const sint32 Count = m->balls.Count();
         auto& NewBall = m->balls.AtAdding();
         NewBall.time = Platform::Utility::CurrentTimeMsec();
         NewBall.sizeR = 20;
+        NewBall.color = BallColor[Count % 4];
         NewBall.pos = Point(x, y);
         const float Radian = Math::ToRadian(Platform::Utility::Random() % 360);
         NewBall.vec.x = 10 * Math::Cos(Radian);
@@ -90,7 +98,7 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
     for(sint32 i = 0; i < m->balls.Count(); ++i)
     {
         ZAY_XYRR(panel, m->balls[i].pos.x, m->balls[i].pos.y, m->balls[i].sizeR, m->balls[i].sizeR)
-        ZAY_RGBA(panel, 255, 0, 0, 128)
+        ZAY_COLOR(panel, m->balls[i].color)
             panel.circle();
     }
 }

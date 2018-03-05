@@ -12,6 +12,7 @@ public:
     {
         time = rhs.time;
         sizeR = rhs.sizeR;
+        color = rhs.color;
         pos = rhs.pos;
         vec = rhs.vec;
         return *this;
@@ -20,6 +21,7 @@ public:
 public:
     uint64 time;
     float sizeR;
+    Color color;
     Point pos;
     Point vec;
 };

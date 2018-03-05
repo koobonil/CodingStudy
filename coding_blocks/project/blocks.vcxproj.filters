@@ -30,7 +30,7 @@
     <ClInclude Include="..\source\blocks.hpp">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\r.hpp">
+    <ClInclude Include="..\source\resource.hpp">
       <Filter>source</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClCompile Include="..\source\main.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\r.cpp">
+    <ClCompile Include="..\source\resource.cpp">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\source\user.cpp">
