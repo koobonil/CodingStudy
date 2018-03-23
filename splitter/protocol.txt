@@ -1,0 +1,63 @@
+----------------------------------------
+[등록]
+
+▶▶▶ signup[프로세스→서버] → signin
+type: signup
+app_name: 응용프로그램명
+process_id: 원하는 프로세스ID(캐시에 있을 경우에만)
+process_pw: 해당 비밀번호(캐시에 있을 경우에만)
+
+◁◁◁ signin[서버→프로세스]
+type: signin
+process_id: 프로세스ID
+process_pw: 비밀번호
+
+◁◁◁ visit[서버→프로세스]
+type: visit
+id: 자동발급된 커넥터ID("P"+피어ID)
+
+◁◁◁ leave[서버→프로세스]
+type: leave
+id: 접속종료된 커넥터ID("P"+피어ID)
+
+
+
+----------------------------------------
+[이벤트]
+
+▶▶▶ event_from_connecter[커넥터→서버] → event(visit발생)
+type: event_from_connecter
+id: 프로세스ID
+idx: 메시지카운터
+payload{}: 하위정보로 구성하여 송신할 데이터
+
+◁◁◁ event[서버→프로세스]
+type: event
+id: 커넥터ID("P"+피어ID)
+idx: 메시지카운터
+payload{}: 하위정보로 구성하여 송신할 데이터
+
+
+
+----------------------------------------
+[딜리버리]
+
+▶▶▶ delivery[프로세스→서버] → delivery_to_connecter
+type: delivery
+id: 커넥터ID("P"+피어ID, "ALL"는 전체이벤트)
+payload{}: 하위정보로 구성하여 송신할 데이터
+
+◁◁◁ delivery_to_connecter[서버→커넥터]
+type: delivery_to_connecter
+id: 프로세스ID
+payload{}: 하위정보로 구성하여 송신할 데이터
+
+
+
+----------------------------------------
+[패킷테스트]
+#json begin {"type":"signup", "app_name":"com.abc.def"} #json end
+#json begin {"type":"signup", "app_name":"com.abc.def", "process_id":"SH133-0000", "process_pw":"578613"} #json end
+#json begin {"type":"event_from_connecter", "id":"SH133-0000", "payload":{"value":"100"}} #json end
+#json begin {"type":"delivery", "id":"P1", "payload":{"value":"999"}} #json end
+#json begin {"type":"delivery", "id":"ALL", "payload":{"value":"123"}} #json end
