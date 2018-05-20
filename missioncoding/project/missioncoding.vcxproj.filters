@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{5c61e721-a50e-4103-9859-c4c48d6b4d42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{63ca831b-57ca-44d0-b144-7784b657e4da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\1.balls">
+      <UniqueIdentifier>{e6acbb0e-88ba-4734-bf9e-c40f5b179ab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\2.blocks">
+      <UniqueIdentifier>{7cc94427-20a6-46c4-a338-d0178448e455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\3.rains">
+      <UniqueIdentifier>{004c2162-1d33-4d14-83a2-4cad5164f5c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\4.tiles">
+      <UniqueIdentifier>{6e371f1d-3ed0-4a72-88c9-0c772a66838c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\5.polygons">
+      <UniqueIdentifier>{52fa6ed0-e833-4663-bc8a-0c36fa774b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\6.bullets">
+      <UniqueIdentifier>{322a5fd5-5cf5-42cc-a830-a6329c6636df}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\common\windows\main.aps">
+      <Filter>resource</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\common\windows\main.ico">
+      <Filter>resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\common\windows\main.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\boss_config.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\resource.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_balls\source\balls.hpp">
+      <Filter>source\1.balls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_balls\source\balls_example.hpp">
+      <Filter>source\1.balls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_blocks\source\blocks.hpp">
+      <Filter>source\2.blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_blocks\source\blocks_example.hpp">
+      <Filter>source\2.blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\missioncoding_function.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\missioncoding_level.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\missioncoding_list.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\classes.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_rains\source\rains.hpp">
+      <Filter>source\3.rains</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_rains\source\rains_example.hpp">
+      <Filter>source\3.rains</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_tiles\source\tiles.hpp">
+      <Filter>source\4.tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_tiles\source\tiles_example.hpp">
+      <Filter>source\4.tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_polygons\source\polygons.hpp">
+      <Filter>source\5.polygons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_polygons\source\polygons_example.hpp">
+      <Filter>source\5.polygons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_bullets\source\bullets.hpp">
+      <Filter>source\6.bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_bullets\source\bullets_example.hpp">
+      <Filter>source\6.bullets</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\resource.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_balls\source\balls.cpp">
+      <Filter>source\1.balls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_balls\source\balls_example.cpp">
+      <Filter>source\1.balls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_balls\source\balls_example_beginner.cpp">
+      <Filter>source\1.balls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_balls\source\balls_example_junior.cpp">
+      <Filter>source\1.balls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_balls\source\balls_example_senior.cpp">
+      <Filter>source\1.balls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_blocks\source\blocks.cpp">
+      <Filter>source\2.blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_blocks\source\blocks_example.cpp">
+      <Filter>source\2.blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_blocks\source\blocks_example_beginner.cpp">
+      <Filter>source\2.blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_blocks\source\blocks_example_junior.cpp">
+      <Filter>source\2.blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_blocks\source\blocks_example_senior.cpp">
+      <Filter>source\2.blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\missioncoding_function.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\missioncoding_level.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\missioncoding_list.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\classes.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_rains\source\rains.cpp">
+      <Filter>source\3.rains</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_rains\source\rains_example.cpp">
+      <Filter>source\3.rains</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_rains\source\rains_example_beginner.cpp">
+      <Filter>source\3.rains</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_rains\source\rains_example_junior.cpp">
+      <Filter>source\3.rains</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_rains\source\rains_example_senior.cpp">
+      <Filter>source\3.rains</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_tiles\source\tiles.cpp">
+      <Filter>source\4.tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_tiles\source\tiles_example.cpp">
+      <Filter>source\4.tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_tiles\source\tiles_example_beginner.cpp">
+      <Filter>source\4.tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_tiles\source\tiles_example_junior.cpp">
+      <Filter>source\4.tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_tiles\source\tiles_example_senior.cpp">
+      <Filter>source\4.tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_polygons\source\polygons.cpp">
+      <Filter>source\5.polygons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_polygons\source\polygons_example.cpp">
+      <Filter>source\5.polygons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_polygons\source\polygons_example_beginner.cpp">
+      <Filter>source\5.polygons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_polygons\source\polygons_example_junior.cpp">
+      <Filter>source\5.polygons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_polygons\source\polygons_example_senior.cpp">
+      <Filter>source\5.polygons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_bullets\source\bullets.cpp">
+      <Filter>source\6.bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_bullets\source\bullets_example.cpp">
+      <Filter>source\6.bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_bullets\source\bullets_example_beginner.cpp">
+      <Filter>source\6.bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_bullets\source\bullets_example_junior.cpp">
+      <Filter>source\6.bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_bullets\source\bullets_example_senior.cpp">
+      <Filter>source\6.bullets</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

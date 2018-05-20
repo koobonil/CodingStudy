@@ -1,8 +1,10 @@
 ﻿#include <boss.hpp>
-#include <service/boss_zay.hpp>
+#include "bullets_example.hpp"
 #include <resource.hpp>
 
-sint32 Add(float& x, float& y)
+MISSION_SENIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
+
+int BulletsExample::Senior::OnAdd(float& x, float& y)
 {
 	static sint32 Count = 0;
 	x = (Platform::Utility::Random() % 400) - 200.0f;
@@ -10,7 +12,7 @@ sint32 Add(float& x, float& y)
     return (++Count < 30)? 20 : -1;
 }
 
-sint32 Act(sint32& type, float& vx, float& vy)
+int BulletsExample::Senior::OnAct(int& type, float& vx, float& vy)
 {
 	if(type == 0)
     {
@@ -27,7 +29,7 @@ sint32 Act(sint32& type, float& vx, float& vy)
     return 0;
 }
 
-void Render(ZayPanel& panel, sint32 type)
+void BulletsExample::Senior::OnRender(ZayPanel& panel, int type)
 {
     ZAY_XYRR(panel, 0, 0, 10, 10)
     {
@@ -44,7 +46,7 @@ void Render(ZayPanel& panel, sint32 type)
     }
 }
 
-sint32 RenderUser(ZayPanel& panel, sint32 id, float vx, float vy)
+int BulletsExample::Senior::OnRenderUser(ZayPanel& panel, int id, float vx, float vy)
 {
 	ZAY_RGB_IF(panel, 0, 0, 255, id == 0)
 	ZAY_RGB_IF(panel, 255, 0, 0, id != 0)

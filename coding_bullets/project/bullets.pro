@@ -9,10 +9,17 @@ INCLUDEPATH += ../source
 HEADERS += ../source/boss_config.h
 SOURCES += ../source/bullets.cpp
 HEADERS += ../source/bullets.hpp
+SOURCES += ../source/bullets_example.cpp
+HEADERS += ../source/bullets_example.hpp
+SOURCES += ../source/bullets_example_beginner.cpp
+SOURCES += ../source/bullets_example_junior.cpp
+SOURCES += ../source/bullets_example_senior.cpp
 SOURCES += ../source/main.cpp
 SOURCES += ../source/resource.cpp
 HEADERS += ../source/resource.hpp
-SOURCES += ../source/user.cpp
+
+SOURCES += ../../missioncoding/source/classes.cpp
+HEADERS += ../../missioncoding/source/classes.hpp
 
 ASSETS_IMAGE.files += ../assets/image
 ASSETS_IMAGE.path = /assets

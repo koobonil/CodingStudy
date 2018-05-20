@@ -28,15 +28,21 @@
     <ResourceCompile Include="..\common\windows\main.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\missioncoding\source\classes.hpp" />
     <ClInclude Include="..\source\boss_config.h" />
     <ClInclude Include="..\source\tiles.hpp" />
     <ClInclude Include="..\source\resource.hpp" />
+    <ClInclude Include="..\source\tiles_example.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\missioncoding\source\classes.cpp" />
     <ClCompile Include="..\source\tiles.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\source\resource.cpp" />
-    <ClCompile Include="..\source\user.cpp" />
+    <ClCompile Include="..\source\tiles_example.cpp" />
+    <ClCompile Include="..\source\tiles_example_beginner.cpp" />
+    <ClCompile Include="..\source\tiles_example_junior.cpp" />
+    <ClCompile Include="..\source\tiles_example_senior.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C8332454-4D7E-40CB-A0A3-8FA930D8BF7F}</ProjectGuid>

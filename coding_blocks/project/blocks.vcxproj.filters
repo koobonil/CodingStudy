@@ -7,6 +7,9 @@
     <Filter Include="resource">
       <UniqueIdentifier>{63ca831b-57ca-44d0-b144-7784b657e4da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\missioncoding">
+      <UniqueIdentifier>{76e3de6d-9f38-4fd3-8ebf-7d9d806d64c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\common\windows\main.aps">
@@ -33,6 +36,12 @@
     <ClInclude Include="..\source\resource.hpp">
       <Filter>source</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\blocks_example.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\missioncoding\source\classes.hpp">
+      <Filter>source\missioncoding</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\blocks.cpp">
@@ -44,8 +53,20 @@
     <ClCompile Include="..\source\resource.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\user.cpp">
+    <ClCompile Include="..\source\blocks_example.cpp">
       <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\blocks_example_beginner.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\blocks_example_junior.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\blocks_example_senior.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\missioncoding\source\classes.cpp">
+      <Filter>source\missioncoding</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,17 +1,20 @@
 ﻿#include <boss.hpp>
-#include <service/boss_zay.hpp>
+#include "blocks_example.hpp"
+#include <resource.hpp>
 
-String Setting(sint32& xcount, sint32& ycount)
+MISSION_SENIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
+
+String BlocksExample::Senior::OnSetting(int& xcount, int& ycount)
 {
-    xcount = 50;
+	xcount = 50;
     ycount = 70;
     return "10,11,12,13,14,15,16,17,18,19";
 }
 
-sint32 CurColor = 2;
-void Click(sint32& id)
+static sint32 CurColor = 2;
+void BlocksExample::Senior::OnClick(int& id)
 {
-    if(id < 10)
+	if(id < 10)
     {
         id = CurColor;
     }
@@ -21,9 +24,9 @@ void Click(sint32& id)
     }
 }
 
-void Render(ZayPanel& panel, sint32 id)
+void BlocksExample::Senior::OnRender(ZayPanel& panel, int id)
 {
-    // 팔레트: 10~19
+	// 팔레트: 10~19
     ZAY_INNER(panel, 10)
     switch(id)
     {

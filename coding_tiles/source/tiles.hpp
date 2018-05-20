@@ -1,22 +1,11 @@
 ﻿#pragma once
-#include <service/boss_zay.hpp>
-
-void Init(int& xcount, int& ycount);
-sint32 Tick();
-void Button(int id);
-void RenderTile(ZayPanel& panel, int x, int y);
+#include "tiles_example.hpp"
 
 class tilesData : public ZayObject
 {
 public:
     tilesData();
     ~tilesData();
-
-public:
-    void OnInit(int& xcount, int& ycount);
-    sint32 OnTick();
-    void OnButton(int id);
-    void OnRenderTile(ZayPanel& panel, int x, int y);
 
 public:
     sint32 mXCount;

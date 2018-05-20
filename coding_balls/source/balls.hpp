@@ -1,45 +1,37 @@
 ﻿#pragma once
-#include <service/boss_zay.hpp>
+#include "balls_example.hpp"
 
 class Ball
 {
     BOSS_DECLARE_NONCOPYABLE_CLASS(Ball)
 public:
-    Ball() {time = 0; sizeR = 0;}
+    Ball() {mTime = 0; mSizeR = 0;}
     ~Ball() {}
     Ball(Ball&& rhs) {operator=(ToReference(rhs));}
     Ball& operator=(Ball&& rhs)
     {
-        time = rhs.time;
-        sizeR = rhs.sizeR;
-        color = rhs.color;
-        pos = rhs.pos;
-        vec = rhs.vec;
+        mTime = rhs.mTime;
+        mSizeR = rhs.mSizeR;
+        mColor = rhs.mColor;
+        mPos = rhs.mPos;
+        mVec = rhs.mVec;
         return *this;
     }
 
 public:
-    uint64 time;
-    float sizeR;
-    Color color;
-    Point pos;
-    Point vec;
+    uint64 mTime;
+    float mSizeR;
+    Color mColor;
+    Point mPos;
+    Point mVec;
 };
 
 class ballsData : public ZayObject
 {
 public:
-    ballsData() {}
-    ~ballsData() {}
+    ballsData();
+    ~ballsData();
 
 public:
-    enum class Wall {LEFT, TOP, RIGHT, BOTTOM};
-
-public:
-    void OnTick(float sec, Point& pos, Point& vec);
-    bool OnCrashWall(Wall wall, Point& vec);
-    bool OnCrashBall(Point& vecA, Point& vecB);
-
-public:
-    Array<Ball> balls;
+    Array<Ball> Balls;
 };

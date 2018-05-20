@@ -28,15 +28,21 @@
     <ResourceCompile Include="..\common\windows\main.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\missioncoding\source\classes.hpp" />
     <ClInclude Include="..\source\boss_config.h" />
     <ClInclude Include="..\source\bullets.hpp" />
+    <ClInclude Include="..\source\bullets_example.hpp" />
     <ClInclude Include="..\source\resource.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\missioncoding\source\classes.cpp" />
     <ClCompile Include="..\source\bullets.cpp" />
+    <ClCompile Include="..\source\bullets_example.cpp" />
+    <ClCompile Include="..\source\bullets_example_beginner.cpp" />
+    <ClCompile Include="..\source\bullets_example_junior.cpp" />
+    <ClCompile Include="..\source\bullets_example_senior.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\source\resource.cpp" />
-    <ClCompile Include="..\source\user.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C8332454-4D7E-40CB-A0A3-8FA930D8BF7F}</ProjectGuid>

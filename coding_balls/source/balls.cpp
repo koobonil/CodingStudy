@@ -1,15 +1,15 @@
 ﻿#include <boss.hpp>
 #include "balls.hpp"
+MISSION_VIEW_DECLARE(MISSION_NAME, "ballsView", BallsExample)
 
 #include <resource.hpp>
-
 ZAY_DECLARE_VIEW_CLASS("ballsView", ballsData)
 
 ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_share* out)
 {
     static sint32 Width = 0;
     static sint32 Height = 0;
-    if(type == CT_Size)
+	if(type == CT_Size)
     {
         sint32s WH = in;
         Width = WH[0];
@@ -18,47 +18,50 @@ ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_sha
     else if(type == CT_Tick)
     {
         uint64 Time = Platform::Utility::CurrentTimeMsec();
-        for(sint32 i = 0; i < m->balls.Count(); ++i)
+        for(sint32 i = 0; i < m->Balls.Count(); ++i)
         {
-            m->balls.At(i).pos += m->balls[i].vec;
-            m->OnTick((Time - m->balls[i].time) * 0.001f, m->balls.At(i).pos, m->balls.At(i).vec);
+            m->Balls.At(i).mPos += m->Balls[i].mVec;
+            exam->mTick((Time - m->Balls[i].mTime) * 0.001f, m->Balls.At(i).mPos, m->Balls.At(i).mVec);
             // 벽충돌
-            if(m->balls[i].pos.x - m->balls[i].sizeR < 0)
+            if(m->Balls[i].mPos.x - m->Balls[i].mSizeR < 0)
             {
-                if(m->OnCrashWall(ballsData::Wall::LEFT, m->balls.At(i).vec))
-                    m->balls.At(i).time = Time;
+                if(exam->mCrashWall(Wall::LEFT, m->Balls.At(i).mVec))
+                    m->Balls.At(i).mTime = Time;
             }
-            else if(m->balls[i].pos.y - m->balls[i].sizeR < 0)
+            else if(m->Balls[i].mPos.y - m->Balls[i].mSizeR < 0)
             {
-                if(m->OnCrashWall(ballsData::Wall::TOP, m->balls.At(i).vec))
-                    m->balls.At(i).time = Time;
+                if(exam->mCrashWall(Wall::TOP, m->Balls.At(i).mVec))
+                    m->Balls.At(i).mTime = Time;
             }
-            else if(Width <= m->balls[i].pos.x + m->balls[i].sizeR)
+            else if(Width <= m->Balls[i].mPos.x + m->Balls[i].mSizeR)
             {
-                if(m->OnCrashWall(ballsData::Wall::RIGHT, m->balls.At(i).vec))
-                    m->balls.At(i).time = Time;
+                if(exam->mCrashWall(Wall::RIGHT, m->Balls.At(i).mVec))
+                    m->Balls.At(i).mTime = Time;
             }
-            else if(Height <= m->balls[i].pos.y + m->balls[i].sizeR)
+            else if(Height <= m->Balls[i].mPos.y + m->Balls[i].mSizeR)
             {
-                if(m->OnCrashWall(ballsData::Wall::BOTTOM, m->balls.At(i).vec))
-                    m->balls.At(i).time = Time;
+                if(exam->mCrashWall(Wall::BOTTOM, m->Balls.At(i).mVec))
+                    m->Balls.At(i).mTime = Time;
             }
             // 공충돌
-            else for(sint32 j = 0; j < m->balls.Count(); ++j)
-            {
-                if(i == j) continue;
-                if(m->balls[j].time == Time) continue;
-                const float Distance = Math::Distance(m->balls[i].pos.x, m->balls[i].pos.y, m->balls[j].pos.x, m->balls[j].pos.y);
-                if(Distance < m->balls[i].sizeR + m->balls[j].sizeR)
-                {
-                    if(m->OnCrashBall(m->balls.At(i).vec, m->balls.At(j).vec))
-                    {
-                        m->balls.At(i).time = Time;
-                        m->balls.At(j).time = Time;
-                        break;
-                    }
-                }
-            }
+            else if(exam->mCrashBall)
+			{
+				for(sint32 j = 0; j < m->Balls.Count(); ++j)
+				{
+					if(i == j) continue;
+					if(m->Balls[j].mTime == Time) continue;
+					const float Distance = Math::Distance(m->Balls[i].mPos.x, m->Balls[i].mPos.y, m->Balls[j].mPos.x, m->Balls[j].mPos.y);
+					if(Distance < m->Balls[i].mSizeR + m->Balls[j].mSizeR)
+					{
+						if(exam->mCrashBall(m->Balls.At(i).mVec, m->Balls.At(j).mVec))
+						{
+							m->Balls.At(i).mTime = Time;
+							m->Balls.At(j).mTime = Time;
+							break;
+						}
+					}
+				}
+			}
         }
         m->invalidate();
     }
@@ -78,15 +81,15 @@ ZAY_VIEW_API OnGesture(GestureType type, sint32 x, sint32 y)
 
     if(type == GT_Pressed)
     {
-        const sint32 Count = m->balls.Count();
-        auto& NewBall = m->balls.AtAdding();
-        NewBall.time = Platform::Utility::CurrentTimeMsec();
-        NewBall.sizeR = 20;
-        NewBall.color = BallColor[Count % 4];
-        NewBall.pos = Point(x, y);
+        const sint32 Count = m->Balls.Count();
+        auto& NewBall = m->Balls.AtAdding();
+        NewBall.mTime = Platform::Utility::CurrentTimeMsec();
+        NewBall.mSizeR = 20;
+        NewBall.mColor = BallColor[Count % 4];
+        NewBall.mPos = Point(x, y);
         const float Radian = Math::ToRadian(Platform::Utility::Random() % 360);
-        NewBall.vec.x = 10 * Math::Cos(Radian);
-        NewBall.vec.y = 10 * Math::Sin(Radian);
+        NewBall.mVec.x = 10 * Math::Cos(Radian);
+        NewBall.mVec.y = 10 * Math::Sin(Radian);
     }
 }
 
@@ -95,42 +98,20 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
     ZAY_RGB(panel, 160, 160, 160)
         panel.fill();
 
-    for(sint32 i = 0; i < m->balls.Count(); ++i)
+    for(sint32 i = 0; i < m->Balls.Count(); ++i)
     {
-        ZAY_XYRR(panel, m->balls[i].pos.x, m->balls[i].pos.y, m->balls[i].sizeR, m->balls[i].sizeR)
-        ZAY_COLOR(panel, m->balls[i].color)
+        ZAY_XYRR(panel, m->Balls[i].mPos.x, m->Balls[i].mPos.y, m->Balls[i].mSizeR, m->Balls[i].mSizeR)
+        ZAY_COLOR(panel, m->Balls[i].mColor)
             panel.circle();
     }
+
+	MissionCollector::RenderUI(panel);
 }
 
-/*void ballsData::OnTick(float sec, Point& pos, Point& vec)
+ballsData::ballsData()
 {
-    pos.y += 10 * sec;
 }
 
-bool ballsData::OnCrashWall(Wall wall, Point& vec)
+ballsData::~ballsData()
 {
-    switch(wall)
-    {
-    case Wall::LEFT:
-        vec.x = Math::Abs(vec.x);
-        break;
-    case Wall::TOP:
-        vec.y = Math::Abs(vec.y);
-        break;
-    case Wall::RIGHT:
-        vec.x = -Math::Abs(vec.x);
-        break;
-    case Wall::BOTTOM:
-        vec.y = -Math::Abs(vec.y);
-        break;
-    }
-    return true;
 }
-
-bool ballsData::OnCrashBall(Point& vecA, Point& vecB)
-{
-    vecA.x *= -1;
-    vecB.x *= -1;
-    return true;
-}*/

@@ -1,12 +1,15 @@
 ﻿#include <boss.hpp>
-#include "balls.hpp"
+#include "balls_example.hpp"
+#include <resource.hpp>
 
-void ballsData::OnTick(float sec, Point& pos, Point& vec)
+MISSION_SENIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
+
+void BallsExample::Senior::OnTick(float sec, Point& pos, Point& vec)
 {
     vec.y += 1;
 }
 
-bool ballsData::OnCrashWall(Wall wall, Point& vec)
+bool BallsExample::Senior::OnCrashWall(Wall wall, Point& vec)
 {
     if(wall == Wall::LEFT)
     {
@@ -27,7 +30,7 @@ bool ballsData::OnCrashWall(Wall wall, Point& vec)
     return true;
 }
 
-bool ballsData::OnCrashBall(Point& vecA, Point& vecB)
+bool BallsExample::Senior::OnCrashBall(Point& vecA, Point& vecB)
 {
     return false;
 }

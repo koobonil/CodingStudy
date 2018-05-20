@@ -9,10 +9,17 @@ INCLUDEPATH += ../source
 HEADERS += ../source/boss_config.h
 SOURCES += ../source/polygons.cpp
 HEADERS += ../source/polygons.hpp
+SOURCES += ../source/polygons_example.cpp
+HEADERS += ../source/polygons_example.hpp
+SOURCES += ../source/polygons_example_beginner.cpp
+SOURCES += ../source/polygons_example_junior.cpp
+SOURCES += ../source/polygons_example_senior.cpp
 SOURCES += ../source/main.cpp
 SOURCES += ../source/resource.cpp
 HEADERS += ../source/resource.hpp
-SOURCES += ../source/user.cpp
+
+SOURCES += ../../missioncoding/source/classes.cpp
+HEADERS += ../../missioncoding/source/classes.hpp
 
 ASSETS_IMAGE.files += ../assets/image
 ASSETS_IMAGE.path = /assets

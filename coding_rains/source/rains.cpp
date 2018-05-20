@@ -1,8 +1,8 @@
 ﻿#include <boss.hpp>
 #include "rains.hpp"
+MISSION_VIEW_DECLARE(MISSION_NAME, "rainsView", RainsExample)
 
 #include <resource.hpp>
-
 ZAY_DECLARE_VIEW_CLASS("rainsView", rainsData)
 
 const float LandY = 0.9f;
@@ -33,7 +33,7 @@ ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_sha
                 const int Y1 = OldY * m->mScreenSize.h - m->mTouchPos.y;
                 const int X2 = CurRain.mPos.x * m->mScreenSize.w - m->mTouchPos.x;
                 const int Y2 = CurRain.mPos.y * m->mScreenSize.h - m->mTouchPos.y;
-                const int Result = m->OnTestRain(X1, Y1, X2, Y2);
+                const int Result = exam->mTestRain(X1, Y1, X2, Y2);
                 if(Result == 1)
                     CurRain.mVisible = false;
                 else if(Result == 2 || Result == 3)
@@ -108,7 +108,7 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
     }
 
     ZAY_XYWH(panel, m->mTouchPos.x, m->mTouchPos.y, panel.w() / 2, panel.h() / 2)
-        m->OnRenderBowl(panel);
+        exam->mRenderBowl(panel);
 
     for(sint32 i = 0; i < m->mRainCount; ++i)
     {
@@ -128,6 +128,8 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
             }
         }
     }
+
+	MissionCollector::RenderUI(panel);
 }
 
 rainsData::rainsData()
@@ -136,14 +138,4 @@ rainsData::rainsData()
 
 rainsData::~rainsData()
 {
-}
-
-void rainsData::OnRenderBowl(ZayPanel& panel)
-{
-    RenderBowl(panel);
-}
-
-int rainsData::OnTestRain(int x1, int y1, int x2, int y2)
-{
-    return TestRain(x1, y1, x2, y2);
 }

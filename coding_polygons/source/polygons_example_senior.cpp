@@ -1,15 +1,17 @@
 ﻿#include <boss.hpp>
-#include <service/boss_zay.hpp>
+#include "polygons_example.hpp"
 #include <resource.hpp>
 
-sint32 Add(float& x, float& y)
+MISSION_SENIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
+
+int PolygonsExample::Senior::OnAdd(float& x, float& y)
 {
     x = (Platform::Utility::Random() % 100) - 50.0f;
     y = (Platform::Utility::Random() % 100) - 50.0f;
     return 20;
 }
 
-sint32 Act(sint32& type, float& vx, float& vy)
+int PolygonsExample::Senior::OnAct(sint32& type, float& vx, float& vy)
 {
     if(type == 0)
     {
@@ -26,7 +28,7 @@ sint32 Act(sint32& type, float& vx, float& vy)
     return 0;
 }
 
-sint32 Score(sint32 type)
+int PolygonsExample::Senior::OnScore(sint32 type)
 {
     if(type == 1)
         return 100;
@@ -35,7 +37,7 @@ sint32 Score(sint32 type)
     return 0;
 }
 
-void Render(ZayPanel& panel, sint32 type, sint32 ani)
+void PolygonsExample::Senior::OnRender(ZayPanel& panel, sint32 type, sint32 ani)
 {
     ZAY_XYRR(panel, 0, 0, 10, 10)
     {

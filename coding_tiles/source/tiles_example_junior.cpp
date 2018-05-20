@@ -1,9 +1,9 @@
 ﻿#include <boss.hpp>
-#include <service/boss_zay.hpp>
+#include "tiles_example.hpp"
 #include <resource.hpp>
 
 // 리소스
-const Color TileColor[7] = {
+static const Color TileColor[7] = {
     {180, 0, 0, 80},
     {0, 180, 0, 80},
     {0, 0, 180, 80},
@@ -12,7 +12,7 @@ const Color TileColor[7] = {
     {0, 180, 180, 80},
     {64, 64, 64, 80}
 };
-point64 TileType[7][4] = {
+static point64 TileType[7][4] = {
     {{0,0}, {1,0}, {0,1}, {1,1}},
     {{0,0}, {0,-1}, {0,1}, {0,2}},
     {{0,0}, {0,-1}, {1,0}, {1,1}},
@@ -23,18 +23,20 @@ point64 TileType[7][4] = {
 };
 
 // 실행정보
-int RunColorID = 3;
-int RunTypeID = 4;
-point64 RunPos = {5, -2};
+static int RunColorID = 3;
+static int RunTypeID = 4;
+static point64 RunPos = {5, -2};
 
-void ResetRun()
+static void ResetRun()
 {
     RunColorID = Platform::Utility::Random() % 7;
     RunTypeID = Platform::Utility::Random() % 7;
     RunPos.y = -2;
 }
 
-void Init(int& xcount, int& ycount)
+MISSION_JUNIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
+
+void TilesExample::Junior::OnInit(int& xcount, int& ycount)
 {
     xcount = 10;
     ycount = 20;
@@ -42,13 +44,13 @@ void Init(int& xcount, int& ycount)
     ResetRun();
 }
 
-sint32 Tick()
+int TilesExample::Junior::OnTick()
 {
     RunPos.y++;
     return 120;
 }
 
-void Button(int id)
+void TilesExample::Junior::OnButton(int id)
 {
     if(0 <= id)
     {
@@ -82,7 +84,7 @@ void Button(int id)
     }
 }
 
-void RenderTile(ZayPanel& panel, int x, int y)
+void TilesExample::Junior::OnRenderTile(ZayPanel& panel, int x, int y)
 {
     // 배경
     if((x + y) % 2 == 1)

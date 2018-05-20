@@ -1,10 +1,5 @@
 ﻿#pragma once
-#include <service/boss_zay.hpp>
-
-sint32 Add(float& x, float& y);
-sint32 Act(sint32& type, float& vx, float& vy);
-sint32 Score(sint32 type);
-void Render(ZayPanel& panel, sint32 type, sint32 ani);
+#include "polygons_example.hpp"
 
 class Area
 {
@@ -38,19 +33,19 @@ public:
     sint32 mSpotAnimate;
 };
 
-class Fly
+class PolygonFly
 {
-    BOSS_DECLARE_NONCOPYABLE_CLASS(Fly)
+    BOSS_DECLARE_NONCOPYABLE_CLASS(PolygonFly)
 public:
-    Fly()
+    PolygonFly()
     {
         mType = 0;
         mVecCount = 0;
         mDeathAnimate = 0;
     }
-    ~Fly() {}
-    Fly(Fly&& rhs) {operator=(ToReference(rhs));}
-    Fly& operator=(Fly&& rhs)
+    ~PolygonFly() {}
+    PolygonFly(PolygonFly&& rhs) {operator=(ToReference(rhs));}
+    PolygonFly& operator=(PolygonFly&& rhs)
     {
         mType = rhs.mType;
         mPos = rhs.mPos;
@@ -68,45 +63,11 @@ public:
     sint32 mDeathAnimate;
 };
 
-class SyncuClient
-{
-protected:
-	SyncuClient(chars name);
-	~SyncuClient();
-
-public:
-	void Resize(sint32 width, sint32 height);
-	void CheckMessage();
-	virtual void OnVisit(chars id) = 0;
-	virtual void OnLeave(chars id) = 0;
-	virtual void OnEvent(chars id, const Context& json) = 0;
-
-private:
-	void OnMessage(Context& json);
-
-public:
-	id_socket mSocket;
-	String mSocketMessage;
-	String mSHCode;
-	String mSHPassword;
-	sint32 mSHCount;
-	sint32 mScreenWidth;
-	sint32 mScreenHeight;
-	sint32 mLastIDX;
-	sint32 mSumIDX;
-};
-
 class polygonsData : public ZayObject, public SyncuClient
 {
 public:
     polygonsData();
     ~polygonsData();
-
-public:
-    sint32 OnAdd(float& x, float& y);
-    sint32 OnAct(sint32& type, float& vx, float& vy);
-    sint32 OnScore(sint32 type);
-    void OnRender(ZayPanel& panel, sint32 type, sint32 ani);
 
 public:
 	void OnVisit(chars id) override;
@@ -117,5 +78,5 @@ public:
     sint32 mScore;
     sint32 mAddWait;
     Map<Area> mAreas;
-    Array<Fly> mFlies;
+    Array<PolygonFly> mFlies;
 };

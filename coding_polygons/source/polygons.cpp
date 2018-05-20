@@ -1,8 +1,8 @@
 ﻿#include <boss.hpp>
 #include "polygons.hpp"
+MISSION_VIEW_DECLARE(MISSION_NAME, "polygonsView", PolygonsExample)
 
 #include <resource.hpp>
-
 ZAY_DECLARE_VIEW_CLASS("polygonsView", polygonsData)
 
 ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_share* out)
@@ -21,7 +21,7 @@ ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_sha
         if(m->mAddWait-- == 0)
         {
             auto& NewFly = m->mFlies.AtAdding();
-            m->mAddWait = m->OnAdd(NewFly.mPos.x, NewFly.mPos.y);
+            m->mAddWait = exam->mAdd(NewFly.mPos.x, NewFly.mPos.y);
         }
         for(sint32 i = 0, iend = m->mFlies.Count(); i < iend; ++i)
         {
@@ -29,7 +29,7 @@ ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_sha
             if(CurFly.mDeathAnimate == 0)
             {
                 if(CurFly.mVecCount-- == 0)
-                    CurFly.mVecCount = m->OnAct(CurFly.mType, CurFly.mVec.x, CurFly.mVec.y);
+                    CurFly.mVecCount = exam->mAct(CurFly.mType, CurFly.mVec.x, CurFly.mVec.y);
                 CurFly.mPos += CurFly.mVec;
                 while(CurFly.mPos.x > m->mScreenWidth / 2) CurFly.mPos.x -= m->mScreenWidth;
                 while(CurFly.mPos.y > m->mScreenHeight / 2) CurFly.mPos.y -= m->mScreenHeight;
@@ -82,7 +82,7 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
     {
         auto& CurFly = m->mFlies[i];
         ZAY_XYRR(panel, panel.w() / 2 + CurFly.mPos.x, panel.h() / 2 + CurFly.mPos.y, 0, 0)
-            m->OnRender(panel, CurFly.mType, CurFly.mDeathAnimate);
+            exam->mRender(panel, CurFly.mType, CurFly.mDeathAnimate);
     }
     // 파리제거
     for(sint32 i = m->mFlies.Count() - 1; 0 <= i; --i)
@@ -90,7 +90,7 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
         auto& CurFly = m->mFlies.At(i);
         if(0 < CurFly.mDeathAnimate && --CurFly.mDeathAnimate == 0)
         {
-            const sint32 CurScore = m->OnScore(CurFly.mType);
+            const sint32 CurScore = exam->mScore(CurFly.mType);
             m->mScore = Math::Max(0, m->mScore + CurScore);
             m->mFlies.SubtractionSection(i);
         }
@@ -187,109 +187,8 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
             }
         }
     }
-}
 
-SyncuClient::SyncuClient(chars name)
-{
-	mSocket = Platform::Socket::OpenForTcp();
-	Platform::Socket::Connect(mSocket, "www.finalbossbehindthedoor.com", 10125);
-
-	String SHCodeJson = String::FromAsset("shcode.json");
-	const Context SHCode(ST_Json, SO_OnlyReference, SHCodeJson, SHCodeJson.Length());
-	mSHCode = SHCode("process_id").GetString();
-	mSHPassword = SHCode("process_pw").GetString();
-	mSHCount = 0;
-
-	if (0 < mSHCode.Length())
-	{
-		const String SignUp = String::Format("#json begin {\"type\":\"signup\", \"app_name\":\"%s\", "
-			"\"process_id\":\"%s\", \"process_pw\":\"%s\"} #json end", name, (chars) mSHCode, (chars) mSHPassword);
-		Platform::Socket::Send(mSocket, (bytes)(chars) SignUp, SignUp.Length());
-	}
-	else
-	{
-		const String SignUp = String::Format("#json begin {\"type\":\"signup\", \"app_name\":\"%s\"} #json end", name);
-		Platform::Socket::Send(mSocket, (bytes)(chars) SignUp, SignUp.Length());
-	}
-
-	mScreenWidth = 0;
-	mScreenHeight = 0;
-	mLastIDX = -1;
-	mSumIDX = 0;
-}
-
-SyncuClient::~SyncuClient()
-{
-	Platform::Socket::Close(mSocket);
-
-	if (0 < mSHCode.Length())
-	{
-		Context SHCode;
-		SHCode.At("process_id").Set(mSHCode);
-		SHCode.At("process_pw").Set(mSHPassword);
-		SHCode.SaveJson().ToAsset("shcode.json");
-	}
-}
-
-void SyncuClient::Resize(sint32 width, sint32 height)
-{
-	mScreenWidth = width;
-	mScreenHeight = height;
-}
-
-void SyncuClient::CheckMessage()
-{
-	sint32 Length = Platform::Socket::RecvAvailable(mSocket, 10);
-	while (0 < Length)
-	{
-		uint08 ReadBuffer[1024];
-		const sint32 ReadLength = Platform::Socket::Recv(mSocket, ReadBuffer, Math::Min(Length, 1024));
-		if (0 < ReadLength)
-		{
-			Length -= ReadLength;
-			mSocketMessage.Add((chars) ReadBuffer, ReadLength);
-			// 버퍼연결
-			static const String JsonBegin("#json begin");
-			static const String JsonEnd("#json end");
-			sint32 BeginPos = 0, EndPos = 0;
-			while ((EndPos = mSocketMessage.Find(0, JsonEnd)) != -1)
-			{
-				if ((BeginPos = mSocketMessage.Find(0, JsonBegin)) != -1)
-				{
-					const sint32 JsonPos = BeginPos + JsonBegin.Length();
-					const sint32 JsonSize = EndPos - JsonPos;
-					Context Json(ST_Json, SO_OnlyReference, ((chars) mSocketMessage) + JsonPos, JsonSize);
-					OnMessage(Json);
-					mSocketMessage = mSocketMessage.Right(mSocketMessage.Length() - (EndPos + JsonEnd.Length()));
-				}
-			}
-		}
-	}
-}
-
-void SyncuClient::OnMessage(Context& json)
-{
-	chars Type = json("type").GetString();
-	mLastIDX = json("idx").GetInt(-1);
-	mSumIDX++;
-
-	if (!String::Compare(Type, "signin"))
-	{
-		mSHCode = json("process_id").GetString();
-		mSHPassword = json("process_pw").GetString();
-	}
-	else if (!String::Compare(Type, "visit"))
-	{
-		mSHCount++;
-		OnLeave(json("id").GetString());
-	}
-	else if (!String::Compare(Type, "leave"))
-	{
-		mSHCount--;
-		OnLeave(json("id").GetString());
-	}
-	else if (!String::Compare(Type, "event"))
-		OnEvent(json("id").GetString(), json("payload"));
+	MissionCollector::RenderUI(panel);
 }
 
 polygonsData::polygonsData() : SyncuClient("polygons")
@@ -301,26 +200,6 @@ polygonsData::polygonsData() : SyncuClient("polygons")
 
 polygonsData::~polygonsData()
 {
-}
-
-sint32 polygonsData::OnAdd(float& x, float& y)
-{
-    return Add(x, y);
-}
-
-sint32 polygonsData::OnAct(sint32& type, float& vx, float& vy)
-{
-    return Act(type, vx, vy);
-}
-
-sint32 polygonsData::OnScore(sint32 type)
-{
-    return Score(type);
-}
-
-void polygonsData::OnRender(ZayPanel& panel, sint32 type, sint32 ani)
-{
-    Render(panel, type, ani);
 }
 
 void polygonsData::OnVisit(chars id)

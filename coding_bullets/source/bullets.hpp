@@ -1,15 +1,10 @@
 ﻿#pragma once
-#include <service/boss_zay.hpp>
+#include "bullets_example.hpp"
 
-sint32 Add(float& x, float& y);
-sint32 Act(sint32& type, float& vx, float& vy);
-void Render(ZayPanel& panel, sint32 type);
-sint32 RenderUser(ZayPanel& panel, sint32 id, float vx, float vy);
-
-class Fly
+class BulletFly
 {
 public:
-    Fly()
+    BulletFly()
 	{
 		mType = 0;
 		mVecCount = 0;
@@ -17,7 +12,7 @@ public:
 		mPrev = nullptr;
 		mNext = nullptr;
 	}
-    ~Fly() {}
+    ~BulletFly() {}
 
 public:
 	sint32 mType;
@@ -25,8 +20,8 @@ public:
 	Point mVec;
     sint32 mVecCount;
 	bool mLinking;
-	Fly* mPrev;
-	Fly* mNext;
+	BulletFly* mPrev;
+	BulletFly* mNext;
 };
 
 class Airplane
@@ -84,35 +79,7 @@ public:
 	sint32 mDegree;
 	bool mDegreeCancelOnce;
 	Map<sint32> mKeyPressMap;
-	Fly mTail;
-};
-
-class SyncuClient
-{
-protected:
-	SyncuClient(chars name);
-	~SyncuClient();
-
-public:
-	void Resize(sint32 width, sint32 height);
-	void CheckMessage();
-	virtual void OnVisit(chars id) = 0;
-	virtual void OnLeave(chars id) = 0;
-	virtual void OnEvent(chars id, const Context& json) = 0;
-
-private:
-	void OnMessage(Context& json);
-
-public:
-	id_socket mSocket;
-	String mSocketMessage;
-	String mSHCode;
-	String mSHPassword;
-	sint32 mSHCount;
-	sint32 mScreenWidth;
-	sint32 mScreenHeight;
-	sint32 mLastIDX;
-	sint32 mSumIDX;
+	BulletFly mTail;
 };
 
 class bulletsData : public ZayObject, public SyncuClient
@@ -122,19 +89,13 @@ public:
     ~bulletsData();
 
 public:
-	sint32 OnAdd(float& x, float& y);
-	sint32 OnAct(sint32& type, float& vx, float& vy);
-	void OnRender(ZayPanel& panel, sint32 type);
-	sint32 OnRenderUser(ZayPanel& panel, sint32 id, float vx, float vy);
-
-public:
 	void OnVisit(chars id) override;
 	void OnLeave(chars id) override;
 	void OnEvent(chars id, const Context& json) override;
 
 public:
 	Map<Airplane> mAirplanes;
-	Map<Fly> mFlies;
+	Map<BulletFly> mFlies;
 	sint32 mLastFlyID;
 	sint32 mAddWait;
 };
