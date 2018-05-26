@@ -25,6 +25,9 @@
     <Filter Include="source\6.bullets">
       <UniqueIdentifier>{322a5fd5-5cf5-42cc-a830-a6329c6636df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\7.clouds">
+      <UniqueIdentifier>{5d0b0898-5f83-4f99-8dc3-09d9415a2f9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\common\windows\main.aps">
@@ -95,6 +98,12 @@
     </ClInclude>
     <ClInclude Include="..\..\coding_bullets\source\bullets_example.hpp">
       <Filter>source\6.bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_clouds\source\clouds.hpp">
+      <Filter>source\7.clouds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_clouds\source\clouds_example.hpp">
+      <Filter>source\7.clouds</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +214,21 @@
     </ClCompile>
     <ClCompile Include="..\..\coding_bullets\source\bullets_example_senior.cpp">
       <Filter>source\6.bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_clouds\source\clouds.cpp">
+      <Filter>source\7.clouds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_clouds\source\clouds_example.cpp">
+      <Filter>source\7.clouds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_clouds\source\clouds_example_beginner.cpp">
+      <Filter>source\7.clouds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_clouds\source\clouds_example_junior.cpp">
+      <Filter>source\7.clouds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_clouds\source\clouds_example_senior.cpp">
+      <Filter>source\7.clouds</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

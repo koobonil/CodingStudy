@@ -89,6 +89,7 @@ protected:
 public:
 	void Resize(sint32 width, sint32 height);
 	void CheckMessage();
+	void RenderUI(ZayPanel& panel);
 	virtual void OnVisit(chars id) = 0;
 	virtual void OnLeave(chars id) = 0;
 	virtual void OnEvent(chars id, const Context& json) = 0;

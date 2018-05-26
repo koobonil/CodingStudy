@@ -28,68 +28,20 @@
     <ResourceCompile Include="..\common\windows\main.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\coding_balls\source\balls.hpp" />
-    <ClInclude Include="..\..\coding_balls\source\balls_example.hpp" />
-    <ClInclude Include="..\..\coding_blocks\source\blocks.hpp" />
-    <ClInclude Include="..\..\coding_blocks\source\blocks_example.hpp" />
-    <ClInclude Include="..\..\coding_bullets\source\bullets.hpp" />
-    <ClInclude Include="..\..\coding_bullets\source\bullets_example.hpp" />
-    <ClInclude Include="..\..\coding_clouds\source\clouds.hpp" />
-    <ClInclude Include="..\..\coding_clouds\source\clouds_example.hpp" />
-    <ClInclude Include="..\..\coding_polygons\source\polygons.hpp" />
-    <ClInclude Include="..\..\coding_polygons\source\polygons_example.hpp" />
-    <ClInclude Include="..\..\coding_rains\source\rains.hpp" />
-    <ClInclude Include="..\..\coding_rains\source\rains_example.hpp" />
-    <ClInclude Include="..\..\coding_tiles\source\tiles.hpp" />
-    <ClInclude Include="..\..\coding_tiles\source\tiles_example.hpp" />
+    <ClInclude Include="..\..\missioncoding\source\classes.hpp" />
     <ClInclude Include="..\source\boss_config.h" />
-    <ClInclude Include="..\source\classes.hpp" />
-    <ClInclude Include="..\source\missioncoding_function.hpp" />
-    <ClInclude Include="..\source\missioncoding_level.hpp" />
-    <ClInclude Include="..\source\missioncoding_list.hpp" />
+    <ClInclude Include="..\source\clouds.hpp" />
+    <ClInclude Include="..\source\clouds_example.hpp" />
     <ClInclude Include="..\source\resource.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\coding_balls\source\balls.cpp" />
-    <ClCompile Include="..\..\coding_balls\source\balls_example.cpp" />
-    <ClCompile Include="..\..\coding_balls\source\balls_example_beginner.cpp" />
-    <ClCompile Include="..\..\coding_balls\source\balls_example_junior.cpp" />
-    <ClCompile Include="..\..\coding_balls\source\balls_example_senior.cpp" />
-    <ClCompile Include="..\..\coding_blocks\source\blocks.cpp" />
-    <ClCompile Include="..\..\coding_blocks\source\blocks_example.cpp" />
-    <ClCompile Include="..\..\coding_blocks\source\blocks_example_beginner.cpp" />
-    <ClCompile Include="..\..\coding_blocks\source\blocks_example_junior.cpp" />
-    <ClCompile Include="..\..\coding_blocks\source\blocks_example_senior.cpp" />
-    <ClCompile Include="..\..\coding_bullets\source\bullets.cpp" />
-    <ClCompile Include="..\..\coding_bullets\source\bullets_example.cpp" />
-    <ClCompile Include="..\..\coding_bullets\source\bullets_example_beginner.cpp" />
-    <ClCompile Include="..\..\coding_bullets\source\bullets_example_junior.cpp" />
-    <ClCompile Include="..\..\coding_bullets\source\bullets_example_senior.cpp" />
-    <ClCompile Include="..\..\coding_clouds\source\clouds.cpp" />
-    <ClCompile Include="..\..\coding_clouds\source\clouds_example.cpp" />
-    <ClCompile Include="..\..\coding_clouds\source\clouds_example_beginner.cpp" />
-    <ClCompile Include="..\..\coding_clouds\source\clouds_example_junior.cpp" />
-    <ClCompile Include="..\..\coding_clouds\source\clouds_example_senior.cpp" />
-    <ClCompile Include="..\..\coding_polygons\source\polygons.cpp" />
-    <ClCompile Include="..\..\coding_polygons\source\polygons_example.cpp" />
-    <ClCompile Include="..\..\coding_polygons\source\polygons_example_beginner.cpp" />
-    <ClCompile Include="..\..\coding_polygons\source\polygons_example_junior.cpp" />
-    <ClCompile Include="..\..\coding_polygons\source\polygons_example_senior.cpp" />
-    <ClCompile Include="..\..\coding_rains\source\rains.cpp" />
-    <ClCompile Include="..\..\coding_rains\source\rains_example.cpp" />
-    <ClCompile Include="..\..\coding_rains\source\rains_example_beginner.cpp" />
-    <ClCompile Include="..\..\coding_rains\source\rains_example_junior.cpp" />
-    <ClCompile Include="..\..\coding_rains\source\rains_example_senior.cpp" />
-    <ClCompile Include="..\..\coding_tiles\source\tiles.cpp" />
-    <ClCompile Include="..\..\coding_tiles\source\tiles_example.cpp" />
-    <ClCompile Include="..\..\coding_tiles\source\tiles_example_beginner.cpp" />
-    <ClCompile Include="..\..\coding_tiles\source\tiles_example_junior.cpp" />
-    <ClCompile Include="..\..\coding_tiles\source\tiles_example_senior.cpp" />
-    <ClCompile Include="..\source\classes.cpp" />
+    <ClCompile Include="..\..\missioncoding\source\classes.cpp" />
+    <ClCompile Include="..\source\clouds.cpp" />
+    <ClCompile Include="..\source\clouds_example.cpp" />
+    <ClCompile Include="..\source\clouds_example_beginner.cpp" />
+    <ClCompile Include="..\source\clouds_example_junior.cpp" />
+    <ClCompile Include="..\source\clouds_example_senior.cpp" />
     <ClCompile Include="..\source\main.cpp" />
-    <ClCompile Include="..\source\missioncoding_function.cpp" />
-    <ClCompile Include="..\source\missioncoding_level.cpp" />
-    <ClCompile Include="..\source\missioncoding_list.cpp" />
     <ClCompile Include="..\source\resource.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -157,7 +109,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -188,7 +140,7 @@ xcopy "$(ProjectDir)..\..\dependency\msvc_$(PlatformToolset)\$(PlatformTarget)\*
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -218,7 +170,7 @@ xcopy "$(ProjectDir)..\..\dependency\msvc_$(PlatformToolset)\$(PlatformTarget)\*
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -251,7 +203,7 @@ xcopy "$(ProjectDir)..\..\dependency\msvc_$(PlatformToolset)\$(PlatformTarget)\*
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>

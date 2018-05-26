@@ -97,9 +97,9 @@ void MissionCollector::RenderUI(ZayPanel& panel)
 					v->next("listView");
 			})
 		{
-			ZAY_RGBA(panel, 0, 255, 255, 128)
+			ZAY_RGBA(panel, 255, 255, 255, 32)
 				panel.fill();
-			ZAY_RGB(panel, 0, 0, 0)
+			ZAY_RGBA(panel, 0, 0, 0, 64)
 			{
 				panel.text("BACK", UIFA_CenterMiddle, UIFE_Right);
 				panel.rect(1);
@@ -185,6 +185,25 @@ void SyncuClient::CheckMessage()
 			}
 		}
 	}
+}
+
+void SyncuClient::RenderUI(ZayPanel& panel)
+{
+	const float BaseSize = Math::MinF(panel.w(), panel.h());
+    ZAY_FONT(panel, BaseSize / 300)
+    {
+        // SH코드
+        ZAY_FONT(panel, 1.2)
+        ZAY_RGB(panel, 128, 0, 128)
+        {
+            if(0 < mSHCount)
+                panel.text(String::Format("%s(%d) ", (chars) mSHCode, mSHCount), UIFA_RightTop);
+            else panel.text(String::Format("%s ", (chars) mSHCode), UIFA_RightTop);
+        }
+        // 마지막 메시지ID
+        ZAY_RGBA(panel, 0, 0, 0, 64)
+            panel.text(String::Format(" idx: %d, sum: %d", mLastIDX, mSumIDX), UIFA_LeftBottom);
+    }
 }
 
 void SyncuClient::OnMessage(Context& json)

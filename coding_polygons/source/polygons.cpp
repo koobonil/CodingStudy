@@ -155,17 +155,6 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
         ZAY_FONT(panel, 2)
         ZAY_RGB(panel, 255, 0, 0)
             panel.text(String::Format(" %06d", m->mScore), UIFA_LeftTop);
-        // SH코드
-        ZAY_FONT(panel, 1.2)
-        ZAY_RGB(panel, 128, 0, 128)
-        {
-            if(0 < m->mSHCount)
-                panel.text(String::Format("%s(%d) ", (chars) m->mSHCode, m->mSHCount), UIFA_RightTop);
-            else panel.text(String::Format("%s ", (chars) m->mSHCode), UIFA_RightTop);
-        }
-        // 마지막 메시지ID
-        ZAY_RGBA(panel, 0, 0, 0, 64)
-            panel.text(String::Format(" idx: %d, sum: %d", m->mLastIDX, m->mSumIDX), UIFA_LeftBottom);
     }
 
     // 터치좌표
@@ -188,6 +177,7 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
         }
     }
 
+	m->RenderUI(panel);
 	MissionCollector::RenderUI(panel);
 }
 

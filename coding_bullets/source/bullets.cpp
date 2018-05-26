@@ -184,23 +184,7 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
 		}
     }
 
-	// UI요소
-    const float BaseSize = Math::MinF(panel.w(), panel.h());
-    ZAY_FONT(panel, BaseSize / 300)
-    {
-        // SH코드
-        ZAY_FONT(panel, 1.2)
-        ZAY_RGB(panel, 128, 0, 128)
-        {
-            if(0 < m->mSHCount)
-                panel.text(String::Format("%s(%d) ", (chars) m->mSHCode, m->mSHCount), UIFA_RightTop);
-            else panel.text(String::Format("%s ", (chars) m->mSHCode), UIFA_RightTop);
-        }
-        // 마지막 메시지ID
-        ZAY_RGBA(panel, 0, 0, 0, 64)
-            panel.text(String::Format(" idx: %d, sum: %d", m->mLastIDX, m->mSumIDX), UIFA_LeftBottom);
-    }
-
+	m->RenderUI(panel);
 	MissionCollector::RenderUI(panel);
 }
 
