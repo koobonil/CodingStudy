@@ -67,13 +67,13 @@ SOURCES += ../../coding_bullets/source/bullets_example_beginner.cpp
 SOURCES += ../../coding_bullets/source/bullets_example_junior.cpp
 SOURCES += ../../coding_bullets/source/bullets_example_senior.cpp
 
-SOURCES += ../../coding_bullets/source/clouds.cpp
-HEADERS += ../../coding_bullets/source/clouds.hpp
-SOURCES += ../../coding_bullets/source/clouds_example.cpp
-HEADERS += ../../coding_bullets/source/clouds_example.hpp
-SOURCES += ../../coding_bullets/source/clouds_example_beginner.cpp
-SOURCES += ../../coding_bullets/source/clouds_example_junior.cpp
-SOURCES += ../../coding_bullets/source/clouds_example_senior.cpp
+SOURCES += ../../coding_clouds/source/clouds.cpp
+HEADERS += ../../coding_clouds/source/clouds.hpp
+SOURCES += ../../coding_clouds/source/clouds_example.cpp
+HEADERS += ../../coding_clouds/source/clouds_example.hpp
+SOURCES += ../../coding_clouds/source/clouds_example_beginner.cpp
+SOURCES += ../../coding_clouds/source/clouds_example_junior.cpp
+SOURCES += ../../coding_clouds/source/clouds_example_senior.cpp
 
 ASSETS_IMAGE.files += ../assets/image
 ASSETS_IMAGE.path = /assets
