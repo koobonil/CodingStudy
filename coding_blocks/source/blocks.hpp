@@ -8,7 +8,7 @@ public:
     ~blocksData();
 
 public:
-    sint32 XCount;
-    sint32 YCount;
-    sint32s Blocks;
+    sint32 mXCount;
+    sint32 mYCount;
+    sint32s mBlocks;
 };

@@ -4,7 +4,7 @@
 
 MISSION_USER_DECLARE(MISSION_NAME, 0, "STEP_0")
 
-String BlocksExample::OnSetting(int& xcount, int& ycount)
+String BlocksExample::OnInit(int& xcount, int& ycount)
 {
 	return "";
 }

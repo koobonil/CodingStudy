@@ -7,11 +7,9 @@
 
 class RainsExample : public Example
 {
-public:
+private:
 	static int OnTestRain(int x1, int y1, int x2, int y2);
 	static void OnRenderBowl(ZayPanel& panel);
-
-public:
 	class Beginner
 	{
 	public:

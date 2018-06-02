@@ -7,13 +7,11 @@
 
 class BulletsExample : public Example
 {
-public:
+private:
 	static int OnAdd(float& x, float& y);
 	static int OnAct(int& type, float& vx, float& vy);
 	static void OnRender(ZayPanel& panel, int type);
 	static int OnRenderUser(ZayPanel& panel, int id, float vx, float vy);
-
-public:
 	class Beginner
 	{
 	public:

@@ -100,6 +100,7 @@ private:
 public:
 	id_socket mSocket;
 	String mSocketMessage;
+	String mProjectName;
 	String mSHCode;
 	String mSHPassword;
 	sint32 mSHCount;

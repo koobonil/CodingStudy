@@ -7,13 +7,11 @@
 
 class TilesExample : public Example
 {
-public:
+private:
 	static void OnInit(int& xcount, int& ycount);
 	static int OnTick();
 	static void OnButton(int id);
 	static void OnRenderTile(ZayPanel& panel, int x, int y);
-
-public:
 	class Beginner
 	{
 	public:

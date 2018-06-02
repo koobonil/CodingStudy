@@ -7,30 +7,28 @@
 
 class BlocksExample : public Example
 {
-public:
-	static String OnSetting(int& xcount, int& ycount);
+private:
+	static String OnInit(int& xcount, int& ycount);
     static void OnClick(int& id);
     static void OnRender(ZayPanel& panel, int id);
-
-public:
 	class Beginner
 	{
 	public:
-		static String OnSetting(int& xcount, int& ycount);
+		static String OnInit(int& xcount, int& ycount);
 		static void OnClick(int& id);
 		static void OnRender(ZayPanel& panel, int id);
 	};
 	class Junior
 	{
 	public:
-		static String OnSetting(int& xcount, int& ycount);
+		static String OnInit(int& xcount, int& ycount);
 		static void OnClick(int& id);
 		static void OnRender(ZayPanel& panel, int id);
 	};
 	class Senior
 	{
 	public:
-		static String OnSetting(int& xcount, int& ycount);
+		static String OnInit(int& xcount, int& ycount);
 		static void OnClick(int& id);
 		static void OnRender(ZayPanel& panel, int id);
 	};
@@ -38,7 +36,7 @@ public:
 public:
 	BlocksExample()
 	{
-		mSetting = nullptr;
+		mInit = nullptr;
 		mClick = nullptr;
 		mRender = nullptr;
 	}
@@ -52,22 +50,22 @@ private:
 		switch(level)
 		{
 		case 0:
-			mSetting = OnSetting;
+			mInit = OnInit;
 			mClick = OnClick;
 			mRender = OnRender;
 			break;
 		case 1:
-			mSetting = Beginner::OnSetting;
+			mInit = Beginner::OnInit;
 			mClick = Beginner::OnClick;
 			mRender = Beginner::OnRender;
 			break;
 		case 2:
-			mSetting = Junior::OnSetting;
+			mInit = Junior::OnInit;
 			mClick = Junior::OnClick;
 			mRender = Junior::OnRender;
 			break;
 		case 3:
-			mSetting = Senior::OnSetting;
+			mInit = Senior::OnInit;
 			mClick = Senior::OnClick;
 			mRender = Senior::OnRender;
 			break;
@@ -75,7 +73,7 @@ private:
 	}
 
 public:
-	String (*mSetting)(int& xcount, int& ycount);
+	String (*mInit)(int& xcount, int& ycount);
 	void (*mClick)(int& id);
 	void (*mRender)(ZayPanel& panel, int id);
 };

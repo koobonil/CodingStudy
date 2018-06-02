@@ -4,7 +4,7 @@
 
 MISSION_SENIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
 
-String BlocksExample::Senior::OnSetting(int& xcount, int& ycount)
+String BlocksExample::Senior::OnInit(int& xcount, int& ycount)
 {
 	xcount = 50;
     ycount = 70;

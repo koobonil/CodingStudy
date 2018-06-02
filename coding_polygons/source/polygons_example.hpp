@@ -7,13 +7,11 @@
 
 class PolygonsExample : public Example
 {
-public:
+private:
 	static int OnAdd(float& x, float& y);
     static int OnAct(int& type, float& vx, float& vy);
     static int OnScore(int type);
     static void OnRender(ZayPanel& panel, int type, int ani);
-
-public:
 	class Beginner
 	{
 	public:

@@ -22,28 +22,28 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
     ZAY_RGB(panel, 160, 160, 160)
         panel.fill();
 
-    for(sint32 y = 0; y < m->YCount; ++y)
-    for(sint32 x = 0; x < m->XCount; ++x)
+    for(sint32 y = 0; y < m->mYCount; ++y)
+    for(sint32 x = 0; x < m->mXCount; ++x)
     {
-        const sint32 i = x + y * m->XCount;
-        ZAY_LTRB_UI(panel, panel.w() * x / m->XCount, panel.h() * y / m->YCount,
-            panel.w() * (x + 1) / m->XCount, panel.h() * (y + 1) / m->YCount, String::Format("%d", i),
+        const sint32 i = x + y * m->mXCount;
+        ZAY_LTRB_UI(panel, panel.w() * x / m->mXCount, panel.h() * y / m->mYCount,
+            panel.w() * (x + 1) / m->mXCount, panel.h() * (y + 1) / m->mYCount, String::Format("%d", i),
             ZAY_GESTURE_T(t, i)
             {
                 if(t == GT_Pressed)
                 {
-                    exam->mClick(m->Blocks.At(i));
+                    exam->mClick(m->mBlocks.At(i));
                 }
                 else if(t == GT_Dropping)
                 {
-                    exam->mClick(m->Blocks.At(i));
+                    exam->mClick(m->mBlocks.At(i));
                 }
             })
         {
             if((x + y) & 1)
             ZAY_RGB(panel, 176, 176, 176)
                 panel.fill();
-            exam->mRender(panel, m->Blocks[i]);
+            exam->mRender(panel, m->mBlocks[i]);
         }
     }
 
@@ -52,12 +52,12 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
 
 blocksData::blocksData()
 {
-    XCount = 0;
-    YCount = 0;
-    String JsonText = exam->mSetting(XCount, YCount);
+    mXCount = 0;
+    mYCount = 0;
+    String JsonText = exam->mInit(mXCount, mYCount);
     Context Json(ST_Json, SO_OnlyReference, "[" + JsonText + "]");
-    for(sint32 i = 0, iend = XCount * YCount; i < iend; ++i)
-        Blocks.AtAdding() = Json[i].GetInt(0);
+    for(sint32 i = 0, iend = mXCount * mYCount; i < iend; ++i)
+        mBlocks.AtAdding() = Json[i].GetInt(0);
 }
 
 blocksData::~blocksData()

@@ -18,45 +18,45 @@ ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_sha
     else if(type == CT_Tick)
     {
         uint64 Time = Platform::Utility::CurrentTimeMsec();
-        for(sint32 i = 0; i < m->Balls.Count(); ++i)
+        for(sint32 i = 0; i < m->mBalls.Count(); ++i)
         {
-            m->Balls.At(i).mPos += m->Balls[i].mVec;
-            exam->mTick((Time - m->Balls[i].mTime) * 0.001f, m->Balls.At(i).mPos, m->Balls.At(i).mVec);
+            m->mBalls.At(i).mPos += m->mBalls[i].mVec;
+            exam->mTick((Time - m->mBalls[i].mTime) * 0.001f, m->mBalls.At(i).mPos, m->mBalls.At(i).mVec);
             // 벽충돌
-            if(m->Balls[i].mPos.x - m->Balls[i].mSizeR < 0)
+            if(m->mBalls[i].mPos.x - m->mBalls[i].mSizeR < 0)
             {
-                if(exam->mCrashWall(Wall::LEFT, m->Balls.At(i).mVec))
-                    m->Balls.At(i).mTime = Time;
+                if(exam->mCrashWall(Wall::LEFT, m->mBalls.At(i).mVec))
+                    m->mBalls.At(i).mTime = Time;
             }
-            else if(m->Balls[i].mPos.y - m->Balls[i].mSizeR < 0)
+            else if(m->mBalls[i].mPos.y - m->mBalls[i].mSizeR < 0)
             {
-                if(exam->mCrashWall(Wall::TOP, m->Balls.At(i).mVec))
-                    m->Balls.At(i).mTime = Time;
+                if(exam->mCrashWall(Wall::TOP, m->mBalls.At(i).mVec))
+                    m->mBalls.At(i).mTime = Time;
             }
-            else if(Width <= m->Balls[i].mPos.x + m->Balls[i].mSizeR)
+            else if(Width <= m->mBalls[i].mPos.x + m->mBalls[i].mSizeR)
             {
-                if(exam->mCrashWall(Wall::RIGHT, m->Balls.At(i).mVec))
-                    m->Balls.At(i).mTime = Time;
+                if(exam->mCrashWall(Wall::RIGHT, m->mBalls.At(i).mVec))
+                    m->mBalls.At(i).mTime = Time;
             }
-            else if(Height <= m->Balls[i].mPos.y + m->Balls[i].mSizeR)
+            else if(Height <= m->mBalls[i].mPos.y + m->mBalls[i].mSizeR)
             {
-                if(exam->mCrashWall(Wall::BOTTOM, m->Balls.At(i).mVec))
-                    m->Balls.At(i).mTime = Time;
+                if(exam->mCrashWall(Wall::BOTTOM, m->mBalls.At(i).mVec))
+                    m->mBalls.At(i).mTime = Time;
             }
             // 공충돌
             else if(exam->mCrashBall)
 			{
-				for(sint32 j = 0; j < m->Balls.Count(); ++j)
+				for(sint32 j = 0; j < m->mBalls.Count(); ++j)
 				{
 					if(i == j) continue;
-					if(m->Balls[j].mTime == Time) continue;
-					const float Distance = Math::Distance(m->Balls[i].mPos.x, m->Balls[i].mPos.y, m->Balls[j].mPos.x, m->Balls[j].mPos.y);
-					if(Distance < m->Balls[i].mSizeR + m->Balls[j].mSizeR)
+					if(m->mBalls[j].mTime == Time) continue;
+					const float Distance = Math::Distance(m->mBalls[i].mPos.x, m->mBalls[i].mPos.y, m->mBalls[j].mPos.x, m->mBalls[j].mPos.y);
+					if(Distance < m->mBalls[i].mSizeR + m->mBalls[j].mSizeR)
 					{
-						if(exam->mCrashBall(m->Balls.At(i).mVec, m->Balls.At(j).mVec))
+						if(exam->mCrashBall(m->mBalls.At(i).mVec, m->mBalls.At(j).mVec))
 						{
-							m->Balls.At(i).mTime = Time;
-							m->Balls.At(j).mTime = Time;
+							m->mBalls.At(i).mTime = Time;
+							m->mBalls.At(j).mTime = Time;
 							break;
 						}
 					}
@@ -81,8 +81,8 @@ ZAY_VIEW_API OnGesture(GestureType type, sint32 x, sint32 y)
 
     if(type == GT_Pressed)
     {
-        const sint32 Count = m->Balls.Count();
-        auto& NewBall = m->Balls.AtAdding();
+        const sint32 Count = m->mBalls.Count();
+        auto& NewBall = m->mBalls.AtAdding();
         NewBall.mTime = Platform::Utility::CurrentTimeMsec();
         NewBall.mSizeR = 20;
         NewBall.mColor = BallColor[Count % 4];
@@ -98,10 +98,10 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
     ZAY_RGB(panel, 160, 160, 160)
         panel.fill();
 
-    for(sint32 i = 0; i < m->Balls.Count(); ++i)
+    for(sint32 i = 0; i < m->mBalls.Count(); ++i)
     {
-        ZAY_XYRR(panel, m->Balls[i].mPos.x, m->Balls[i].mPos.y, m->Balls[i].mSizeR, m->Balls[i].mSizeR)
-        ZAY_COLOR(panel, m->Balls[i].mColor)
+        ZAY_XYRR(panel, m->mBalls[i].mPos.x, m->mBalls[i].mPos.y, m->mBalls[i].mSizeR, m->mBalls[i].mSizeR)
+        ZAY_COLOR(panel, m->mBalls[i].mColor)
             panel.circle();
     }
 

@@ -33,5 +33,5 @@ public:
     ~ballsData();
 
 public:
-    Array<Ball> Balls;
+    Array<Ball> mBalls;
 };

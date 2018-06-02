@@ -13,12 +13,10 @@ using namespace BallsExampleClasses;
 
 class BallsExample : public Example
 {
-public:
+private:
 	static void OnTick(float sec, Point& pos, Point& vec);
 	static bool OnCrashWall(Wall wall, Point& vec);
 	static bool OnCrashBall(Point& vecA, Point& vecB);
-
-public:
 	class Beginner
 	{
 	public:

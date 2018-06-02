@@ -7,13 +7,11 @@
 
 class CloudsExample : public Example
 {
-public:
+private:
 	static float OnTickScroll(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec);
 	static Rect OnAddCloud(float& skywidth);
 	static void OnRenderCloud(ZayPanel& panel);
 	static void OnRenderActor(ZayPanel& panel, const Point* grabbed_cloud);
-
-public:
 	class Beginner
 	{
 	public:
@@ -23,6 +21,7 @@ public:
 	class Junior
 	{
 	public:
+		STEP_DECLARE
 		static float OnTickScroll(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec);
 		static Rect OnAddCloud(float& skywidth);
 		static void OnRenderCloud(ZayPanel& panel);
@@ -67,6 +66,7 @@ private:
 			mRenderActor = nullptr;
 			break;
 		case 2:
+			STEP_SET(Junior)
 			mTickScroll = Junior::OnTickScroll;
 			mAddCloud = Junior::OnAddCloud;
 			mRenderCloud = Junior::OnRenderCloud;

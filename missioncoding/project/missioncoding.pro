@@ -75,6 +75,14 @@ SOURCES += ../../coding_clouds/source/clouds_example_beginner.cpp
 SOURCES += ../../coding_clouds/source/clouds_example_junior.cpp
 SOURCES += ../../coding_clouds/source/clouds_example_senior.cpp
 
+SOURCES += ../../coding_cars/source/cars.cpp
+HEADERS += ../../coding_cars/source/cars.hpp
+SOURCES += ../../coding_cars/source/cars_example.cpp
+HEADERS += ../../coding_cars/source/cars_example.hpp
+SOURCES += ../../coding_cars/source/cars_example_beginner.cpp
+SOURCES += ../../coding_cars/source/cars_example_junior.cpp
+SOURCES += ../../coding_cars/source/cars_example_senior.cpp
+
 ASSETS_IMAGE.files += ../assets/image
 ASSETS_IMAGE.path = /assets
 

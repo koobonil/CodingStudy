@@ -28,6 +28,9 @@
     <Filter Include="source\7.clouds">
       <UniqueIdentifier>{5d0b0898-5f83-4f99-8dc3-09d9415a2f9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\8.cars">
+      <UniqueIdentifier>{945ad925-894a-4b3c-b9c8-01c7d9b3d621}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\common\windows\main.aps">
@@ -104,6 +107,12 @@
     </ClInclude>
     <ClInclude Include="..\..\coding_clouds\source\clouds_example.hpp">
       <Filter>source\7.clouds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_cars\source\cars.hpp">
+      <Filter>source\8.cars</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_cars\source\cars_example.hpp">
+      <Filter>source\8.cars</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +238,21 @@
     </ClCompile>
     <ClCompile Include="..\..\coding_clouds\source\clouds_example_senior.cpp">
       <Filter>source\7.clouds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_cars\source\cars.cpp">
+      <Filter>source\8.cars</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_cars\source\cars_example.cpp">
+      <Filter>source\8.cars</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_cars\source\cars_example_beginner.cpp">
+      <Filter>source\8.cars</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_cars\source\cars_example_junior.cpp">
+      <Filter>source\8.cars</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_cars\source\cars_example_senior.cpp">
+      <Filter>source\8.cars</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

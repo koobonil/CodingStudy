@@ -34,6 +34,8 @@
     <ClInclude Include="..\..\coding_blocks\source\blocks_example.hpp" />
     <ClInclude Include="..\..\coding_bullets\source\bullets.hpp" />
     <ClInclude Include="..\..\coding_bullets\source\bullets_example.hpp" />
+    <ClInclude Include="..\..\coding_cars\source\cars.hpp" />
+    <ClInclude Include="..\..\coding_cars\source\cars_example.hpp" />
     <ClInclude Include="..\..\coding_clouds\source\clouds.hpp" />
     <ClInclude Include="..\..\coding_clouds\source\clouds_example.hpp" />
     <ClInclude Include="..\..\coding_polygons\source\polygons.hpp" />
@@ -65,6 +67,11 @@
     <ClCompile Include="..\..\coding_bullets\source\bullets_example_beginner.cpp" />
     <ClCompile Include="..\..\coding_bullets\source\bullets_example_junior.cpp" />
     <ClCompile Include="..\..\coding_bullets\source\bullets_example_senior.cpp" />
+    <ClCompile Include="..\..\coding_cars\source\cars.cpp" />
+    <ClCompile Include="..\..\coding_cars\source\cars_example.cpp" />
+    <ClCompile Include="..\..\coding_cars\source\cars_example_beginner.cpp" />
+    <ClCompile Include="..\..\coding_cars\source\cars_example_junior.cpp" />
+    <ClCompile Include="..\..\coding_cars\source\cars_example_senior.cpp" />
     <ClCompile Include="..\..\coding_clouds\source\clouds.cpp" />
     <ClCompile Include="..\..\coding_clouds\source\clouds_example.cpp" />
     <ClCompile Include="..\..\coding_clouds\source\clouds_example_beginner.cpp" />

@@ -4,7 +4,7 @@
 
 MISSION_JUNIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
 
-String BlocksExample::Junior::OnSetting(int& xcount, int& ycount)
+String BlocksExample::Junior::OnInit(int& xcount, int& ycount)
 {
 	xcount = 50;
     ycount = 70;

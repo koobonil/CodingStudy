@@ -114,7 +114,8 @@ SyncuClient::SyncuClient(chars name)
 	mSocket = Platform::Socket::OpenForTcp();
 	Platform::Socket::Connect(mSocket, "www.finalbossbehindthedoor.com", 10125);
 
-	String SHCodeJson = String::FromAsset("shcode.json");
+	mProjectName = name;
+	String SHCodeJson = String::FromAsset(String::Format("shcode_%s.json", (chars) mProjectName));
 	const Context SHCode(ST_Json, SO_OnlyReference, SHCodeJson, SHCodeJson.Length());
 	mSHCode = SHCode("process_id").GetString();
 	mSHPassword = SHCode("process_pw").GetString();
@@ -123,12 +124,12 @@ SyncuClient::SyncuClient(chars name)
 	if (0 < mSHCode.Length())
 	{
 		const String SignUp = String::Format("#json begin {\"type\":\"signup\", \"app_name\":\"%s\", "
-			"\"process_id\":\"%s\", \"process_pw\":\"%s\"} #json end", name, (chars) mSHCode, (chars) mSHPassword);
+			"\"process_id\":\"%s\", \"process_pw\":\"%s\"} #json end", (chars) mProjectName, (chars) mSHCode, (chars) mSHPassword);
 		Platform::Socket::Send(mSocket, (bytes)(chars) SignUp, SignUp.Length());
 	}
 	else
 	{
-		const String SignUp = String::Format("#json begin {\"type\":\"signup\", \"app_name\":\"%s\"} #json end", name);
+		const String SignUp = String::Format("#json begin {\"type\":\"signup\", \"app_name\":\"%s\"} #json end", (chars) mProjectName);
 		Platform::Socket::Send(mSocket, (bytes)(chars) SignUp, SignUp.Length());
 	}
 
@@ -147,7 +148,7 @@ SyncuClient::~SyncuClient()
 		Context SHCode;
 		SHCode.At("process_id").Set(mSHCode);
 		SHCode.At("process_pw").Set(mSHPassword);
-		SHCode.SaveJson().ToAsset("shcode.json");
+		SHCode.SaveJson().ToAsset(String::Format("shcode_%s.json", (chars) mProjectName));
 	}
 }
 
@@ -220,7 +221,7 @@ void SyncuClient::OnMessage(Context& json)
 	else if (!String::Compare(Type, "visit"))
 	{
 		mSHCount++;
-		OnLeave(json("id").GetString());
+		OnVisit(json("id").GetString());
 	}
 	else if (!String::Compare(Type, "leave"))
 	{

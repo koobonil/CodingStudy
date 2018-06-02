@@ -4,7 +4,7 @@
 
 MISSION_BEGINNER_DECLARE(MISSION_NAME, 0, "STEP_0")
 
-String BlocksExample::Beginner::OnSetting(int& xcount, int& ycount)
+String BlocksExample::Beginner::OnInit(int& xcount, int& ycount)
 {
 	xcount = 10;
     ycount = 10;
