@@ -22,6 +22,13 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
 {
     ZAY_RGB(panel, 192, 192, 192)
         panel.fill();
+
+	if(auto CurElement = MissionCollector::FocusedMission())
+	ZAY_INNER(panel, 5)
+	{
+		ZAY_RGB(panel, 0, 0, 0)
+			panel.text(CurElement->mExampleCode, UIFA_LeftTop, UIFE_Right);
+	}
 }
 
 functionData::functionData()

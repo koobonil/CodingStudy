@@ -2,6 +2,13 @@
 #include "tiles_example.hpp"
 #include <resource.hpp>
 
+////////////////////////////////////////////////////////////////////////////////
+#define LEVEL_NUMBER LEVEL_SENIOR
+
+////////////////////////////////////////////////////////////////////////////////
+#define STEP_NUMBER 0
+MISSION_DECLARE("STEP_0")
+
 // 리소스
 static const Color TileColor[7] = {
     {180, 0, 0, 80},
@@ -33,8 +40,6 @@ static void ResetRun()
     RunTypeID = Platform::Utility::Random() % 7;
     RunPos.y = -2;
 }
-
-MISSION_SENIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
 
 void TilesExample::Senior::OnInit(int& xcount, int& ycount)
 {

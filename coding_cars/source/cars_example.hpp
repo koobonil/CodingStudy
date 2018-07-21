@@ -3,6 +3,8 @@
 #include <service/boss_zay.hpp>
 #include "../../missioncoding/source/classes.hpp"
 
+#define MISSION_ID 8
+#define MISSION_CLASS CarsExample
 #define MISSION_NAME "08.Cars"
 
 namespace CarsExampleClasses
@@ -11,6 +13,14 @@ namespace CarsExampleClasses
 	enum class Joystick {ARROW_L, ARROW_U, ARROW_R, ARROW_D, BUTTON1, BUTTON2};
 }
 using namespace CarsExampleClasses;
+
+STEP_API_DECLARE(String OnInit)(int& xCount, int& yCount, float& carSize, float& friction) {}
+STEP_API_DECLARE(void OnCreateCar)(Point& pos, float& angle360) {}
+STEP_API_DECLARE(void OnCrashCar)(Point otherPos, Point& vec) {}
+STEP_API_DECLARE(void OnCrashTile)(char tile, Wall wall, Point& vec) {}
+STEP_API_DECLARE(void OnInput)(Joystick joystick, Point& vec, float& angle360) {}
+STEP_API_DECLARE(void OnRenderCar)(ZayPanel& panel, float angle360, int fart) {}
+STEP_API_DECLARE(void OnRenderTile)(ZayPanel& panel, char tile) {}
 
 class CarsExample : public Example
 {

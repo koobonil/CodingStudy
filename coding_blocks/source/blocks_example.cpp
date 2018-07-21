@@ -2,7 +2,12 @@
 #include "blocks_example.hpp"
 #include <resource.hpp>
 
-MISSION_USER_DECLARE(MISSION_NAME, 0, "STEP_0")
+////////////////////////////////////////////////////////////////////////////////
+#define LEVEL_NUMBER LEVEL_USER
+
+////////////////////////////////////////////////////////////////////////////////
+#define STEP_NUMBER 0
+MISSION_DECLARE("STEP_0")
 
 String BlocksExample::OnInit(int& xcount, int& ycount)
 {

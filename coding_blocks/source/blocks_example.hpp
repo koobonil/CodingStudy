@@ -3,7 +3,13 @@
 #include <service/boss_zay.hpp>
 #include "../../missioncoding/source/classes.hpp"
 
+#define MISSION_ID 2
+#define MISSION_CLASS BlocksExample
 #define MISSION_NAME "02.Blocks"
+
+STEP_API_DECLARE(String OnInit)(int& xcount, int& ycount) {}
+STEP_API_DECLARE(void OnClick)(int& id) {}
+STEP_API_DECLARE(void OnRender)(ZayPanel& panel, int id) {}
 
 class BlocksExample : public Example
 {

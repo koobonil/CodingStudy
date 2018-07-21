@@ -2,9 +2,14 @@
 #include "rains_example.hpp"
 #include <resource.hpp>
 
-static float WaterHeight = 0;
+////////////////////////////////////////////////////////////////////////////////
+#define LEVEL_NUMBER LEVEL_JUNIOR
 
-MISSION_JUNIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
+////////////////////////////////////////////////////////////////////////////////
+#define STEP_NUMBER 0
+MISSION_DECLARE("STEP_0")
+
+static float WaterHeight = 0;
 
 int RainsExample::Junior::OnTestRain(int x1, int y1, int x2, int y2)
 {

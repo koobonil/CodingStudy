@@ -3,7 +3,14 @@
 #include <service/boss_zay.hpp>
 #include "../../missioncoding/source/classes.hpp"
 
+#define MISSION_ID 6
+#define MISSION_CLASS BulletsExample
 #define MISSION_NAME "06.Bullets"
+
+STEP_API_DECLARE(int OnAdd)(float& x, float& y) {}
+STEP_API_DECLARE(int OnAct)(int& type, float& vx, float& vy) {}
+STEP_API_DECLARE(void OnRender)(ZayPanel& panel, int type) {}
+STEP_API_DECLARE(int OnRenderUser)(ZayPanel& panel, int id, float vx, float vy) {}
 
 class BulletsExample : public Example
 {

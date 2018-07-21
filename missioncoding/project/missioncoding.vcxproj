@@ -38,6 +38,8 @@
     <ClInclude Include="..\..\coding_cars\source\cars_example.hpp" />
     <ClInclude Include="..\..\coding_clouds\source\clouds.hpp" />
     <ClInclude Include="..\..\coding_clouds\source\clouds_example.hpp" />
+    <ClInclude Include="..\..\coding_maptool\source\maptool.hpp" />
+    <ClInclude Include="..\..\coding_maptool\source\maptool_example.hpp" />
     <ClInclude Include="..\..\coding_polygons\source\polygons.hpp" />
     <ClInclude Include="..\..\coding_polygons\source\polygons_example.hpp" />
     <ClInclude Include="..\..\coding_rains\source\rains.hpp" />
@@ -77,6 +79,11 @@
     <ClCompile Include="..\..\coding_clouds\source\clouds_example_beginner.cpp" />
     <ClCompile Include="..\..\coding_clouds\source\clouds_example_junior.cpp" />
     <ClCompile Include="..\..\coding_clouds\source\clouds_example_senior.cpp" />
+    <ClCompile Include="..\..\coding_maptool\source\maptool.cpp" />
+    <ClCompile Include="..\..\coding_maptool\source\maptool_example.cpp" />
+    <ClCompile Include="..\..\coding_maptool\source\maptool_example_beginner.cpp" />
+    <ClCompile Include="..\..\coding_maptool\source\maptool_example_junior.cpp" />
+    <ClCompile Include="..\..\coding_maptool\source\maptool_example_senior.cpp" />
     <ClCompile Include="..\..\coding_polygons\source\polygons.cpp" />
     <ClCompile Include="..\..\coding_polygons\source\polygons_example.cpp" />
     <ClCompile Include="..\..\coding_polygons\source\polygons_example_beginner.cpp" />

@@ -3,6 +3,8 @@
 #include <element/boss_point.hpp>
 #include "../../missioncoding/source/classes.hpp"
 
+#define MISSION_ID 1
+#define MISSION_CLASS BallsExample
 #define MISSION_NAME "01.Balls"
 
 namespace BallsExampleClasses
@@ -10,6 +12,10 @@ namespace BallsExampleClasses
 	enum class Wall {LEFT, TOP, RIGHT, BOTTOM};
 }
 using namespace BallsExampleClasses;
+
+STEP_API_DECLARE(void OnTick)(float sec, Point& pos, Point& vec) {}
+STEP_API_DECLARE(bool OnCrashWall)(Wall wall, Point& vec) {}
+STEP_API_DECLARE(bool OnCrashBall)(Point& vecA, Point& vecB) {}
 
 class BallsExample : public Example
 {

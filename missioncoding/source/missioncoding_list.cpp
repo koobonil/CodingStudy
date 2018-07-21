@@ -25,9 +25,9 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
 
 	auto& Data = MissionData::ST();
 	ZAY_INNER(panel, 5)
-	for(sint32 i = 0, iend = Data.mElements.Count(); i < iend; ++i)
+	for(sint32 i = 0, iend = Data.elements().Count(); i < iend; ++i)
 	{
-		auto CurElement = Data.mElements.AccessByOrder(i);
+		auto CurElement = Data.elements().AccessByOrder(i);
 		const String CurButton = String::Format("list_%d", i);
 		const String CurPlayButton = String::Format("play_%d", i);
 
@@ -38,14 +38,14 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
 			{
 				if(t == GT_InReleased)
 				{
-					auto CurElement = MissionData::ST().mElements.AccessByOrder(i);
-					MissionData::ST().mFocus = CurElement->mName;
+					auto CurElement = MissionData::ST().elements().AccessByOrder(i);
+					MissionData::ST().SetFocus(CurElement->mName);
 					Platform::UpdateAllViews();
 				}
 			})
 		{
 			ZAY_RGB(panel, 255, 255, 255)
-			ZAY_RGB_IF(panel, 64, 192, 192, !CurElement->mName.Compare(MissionData::ST().mFocus))
+			ZAY_RGB_IF(panel, 64, 192, 192, !CurElement->mName.Compare(MissionData::ST().focus()))
 			ZAY_RGB_IF(panel, 80, 80, 80, panel.state(CurButton) & PS_Pressed)
 				panel.fill();
 			ZAY_RGB(panel, 0, 0, 0)
@@ -62,8 +62,8 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
 				{
 					if(t == GT_InReleased)
 					{
-						auto CurElement = MissionData::ST().mElements.AccessByOrder(i);
-						MissionData::ST().mFocus = CurElement->mName;
+						auto CurElement = MissionData::ST().elements().AccessByOrder(i);
+						MissionData::ST().SetFocus(CurElement->mName);
 						Platform::UpdateAllViews();
 						m->next(CurElement->mView);
 					}

@@ -3,7 +3,14 @@
 #include <service/boss_zay.hpp>
 #include "../../missioncoding/source/classes.hpp"
 
+#define MISSION_ID 5
+#define MISSION_CLASS PolygonsExample
 #define MISSION_NAME "05.Polygons"
+
+STEP_API_DECLARE(int OnAdd)(float& x, float& y) {}
+STEP_API_DECLARE(int OnAct)(int& type, float& vx, float& vy) {}
+STEP_API_DECLARE(int OnScore)(int type) {}
+STEP_API_DECLARE(void OnRender)(ZayPanel& panel, int type, int ani) {}
 
 class PolygonsExample : public Example
 {

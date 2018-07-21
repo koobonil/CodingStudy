@@ -34,7 +34,10 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
 				ZAY_GESTURE_T(t, i, CurElement)
 				{
 					if(t == GT_Pressed)
+					{
 						CurElement->SetLevel(i);
+						Platform::UpdateAllViews();
+					}
 				})
 			ZAY_COLOR(panel, (i == CurElement->mExampleLevel)? Color(255, 128, 0) : Color(0, 0, 0))
 			{
@@ -59,14 +62,17 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
 					ZAY_GESTURE_T(t, i, CurElement)
 					{
 						if(t == GT_Pressed)
+						{
 							CurElement->SetStep(i);
+							Platform::UpdateAllViews();
+						}
 					})
 				ZAY_COLOR(panel, (i == CurElement->mExampleStep)? Color(255, 128, 0) : Color(0, 0, 0))
 				{
 					ZAY_RGBA(panel, 128, 128, 128, 64)
 						panel.fill();
 					ZAY_RGB(panel, 0, 0, 0)
-						panel.text(CurElement->mComments[CurElement->mExampleLevel].AtWherever(i), UIFA_CenterMiddle, UIFE_Right);
+						panel.text(CurElement->mComments[CurElement->mExampleLevel].AtWherever(i).mSubject, UIFA_CenterMiddle, UIFE_Right);
 					panel.rect(2);
 				}
 			}

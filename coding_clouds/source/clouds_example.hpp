@@ -3,7 +3,14 @@
 #include <service/boss_zay.hpp>
 #include "../../missioncoding/source/classes.hpp"
 
+#define MISSION_ID 7
+#define MISSION_CLASS CloudsExample
 #define MISSION_NAME "07.Clouds"
+
+STEP_API_DECLARE(float OnTickScroll)(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec) {}
+STEP_API_DECLARE(Rect OnAddCloud)(float& skywidth) {}
+STEP_API_DECLARE(void OnRenderCloud)(ZayPanel& panel) {}
+STEP_API_DECLARE(void OnRenderActor)(ZayPanel& panel, const Point* grabbed_cloud) {}
 
 class CloudsExample : public Example
 {

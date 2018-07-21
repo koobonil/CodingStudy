@@ -3,7 +3,11 @@
 #include <resource.hpp>
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_BEGINNER_DECLARE(MISSION_NAME, 0, "STEP_0")
+#define LEVEL_NUMBER LEVEL_BEGINNER
+
+////////////////////////////////////////////////////////////////////////////////
+#define STEP_NUMBER 0
+MISSION_DECLARE("STEP_0")
 // 일단 워밍업을 좀 해봅시다.
 // 가장 간단하게 보이는 함수를 선택하여 간단한 코드를 달고
 // 그 결과를 확인하여 봅시다.
@@ -17,7 +21,7 @@ MISSION_BEGINNER_DECLARE(MISSION_NAME, 0, "STEP_0")
 // 소수값의 부호를 제거하여 양수로 만들서 주는 함수입니다.
 // 예를 들어 -1, -2, -1.1, -2.2와 같은 수를 1, 2, 1.1, 2.2로 만들어 주는 겁니다.
 // 이미 양수인 1, 2, 3을 넣으면 그대로 1, 2, 3로 나옵니다.
-static bool STEP_FUNC(0, OnCrashWall)(Wall wall, Point& vec)
+STEP_API(bool OnCrashWall)(Wall wall, Point& vec)
 {
     if(wall == Wall::LEFT) // 1) 왼쪽 벽에 부딪혔을 때
     {
@@ -27,7 +31,8 @@ static bool STEP_FUNC(0, OnCrashWall)(Wall wall, Point& vec)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_BEGINNER_DECLARE(MISSION_NAME, 1, "STEP_1")
+#define STEP_NUMBER 1
+MISSION_DECLARE("STEP_1")
 // 이번에는 프레임처리를 배워보겠습니다.
 // 모든 애니메이션은 사실 눈속임입니다.
 // 영화처럼 정지장면을 연속적으로 보여줌으로써
@@ -41,13 +46,13 @@ MISSION_BEGINNER_DECLARE(MISSION_NAME, 1, "STEP_1")
 // 이제 OnTick함수를 한번 다뤄볼까요?
 // 파라미터 vec를 주목해 봅시다. 매 프레임시 진행방향을 받아보고
 // 참조형(&) 파라미터이므로 그 값을 바꿀 수도 있습니다.
-static void STEP_FUNC(1, OnTick)(float sec, Point& pos, Point& vec)
+STEP_API(void OnTick)(float sec, Point& pos, Point& vec)
 {
     vec.y += 0.5; // 1) 중력(아래)방향으로 진행방향을 약간 당겨보는 겁니다.
 }
 
 // OnCrashWall함수에서 오른쪽 벽도 왼쪽 벽과 마찬가지로 처리합니다.
-static bool STEP_FUNC(1, OnCrashWall)(Wall wall, Point& vec)
+STEP_API(bool OnCrashWall)(Wall wall, Point& vec)
 {
     if(wall == Wall::LEFT)
     {
@@ -61,9 +66,10 @@ static bool STEP_FUNC(1, OnCrashWall)(Wall wall, Point& vec)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_BEGINNER_DECLARE(MISSION_NAME, 2, "STEP_2")
+#define STEP_NUMBER 2
+MISSION_DECLARE("STEP_2")
 
-static bool STEP_FUNC(2, OnCrashWall)(Wall wall, Point& vec)
+STEP_API(bool OnCrashWall)(Wall wall, Point& vec)
 {
     if(wall == Wall::LEFT)
     {
@@ -97,7 +103,7 @@ void BallsExample::Beginner::OnTick(float sec, Point& pos, Point& vec)
     switch(gStep)
 	{
 	case 2:
-	case 1: OnTick_STEP1(sec, pos, vec); break;
+	case 1: STEP_API_CALL(1, OnTick)(sec, pos, vec); break;
 	case 0: break;
 	}
 }
@@ -106,9 +112,9 @@ bool BallsExample::Beginner::OnCrashWall(Wall wall, Point& vec)
 {
     switch(gStep)
 	{
-	case 2: return OnCrashWall_STEP2(wall, vec); break;
-	case 1: return OnCrashWall_STEP1(wall, vec); break;
-	case 0: return OnCrashWall_STEP0(wall, vec); break;
+	case 2: return STEP_API_CALL(2, OnCrashWall)(wall, vec); break;
+	case 1: return STEP_API_CALL(1, OnCrashWall)(wall, vec); break;
+	case 0: return STEP_API_CALL(0, OnCrashWall)(wall, vec); break;
 	}
 	return false;
 }

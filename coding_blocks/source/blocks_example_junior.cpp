@@ -2,7 +2,12 @@
 #include "blocks_example.hpp"
 #include <resource.hpp>
 
-MISSION_JUNIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
+////////////////////////////////////////////////////////////////////////////////
+#define LEVEL_NUMBER LEVEL_JUNIOR
+
+////////////////////////////////////////////////////////////////////////////////
+#define STEP_NUMBER 0
+MISSION_DECLARE("STEP_0")
 
 String BlocksExample::Junior::OnInit(int& xcount, int& ycount)
 {

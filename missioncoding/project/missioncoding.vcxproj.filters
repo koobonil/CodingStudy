@@ -31,6 +31,9 @@
     <Filter Include="source\8.cars">
       <UniqueIdentifier>{945ad925-894a-4b3c-b9c8-01c7d9b3d621}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\9.maptool">
+      <UniqueIdentifier>{6b4e7098-c36e-4705-81a6-9b30b1edbf95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\common\windows\main.aps">
@@ -113,6 +116,12 @@
     </ClInclude>
     <ClInclude Include="..\..\coding_cars\source\cars_example.hpp">
       <Filter>source\8.cars</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_maptool\source\maptool.hpp">
+      <Filter>source\9.maptool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_maptool\source\maptool_example.hpp">
+      <Filter>source\9.maptool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +262,21 @@
     </ClCompile>
     <ClCompile Include="..\..\coding_cars\source\cars_example_senior.cpp">
       <Filter>source\8.cars</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_maptool\source\maptool.cpp">
+      <Filter>source\9.maptool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_maptool\source\maptool_example.cpp">
+      <Filter>source\9.maptool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_maptool\source\maptool_example_beginner.cpp">
+      <Filter>source\9.maptool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_maptool\source\maptool_example_junior.cpp">
+      <Filter>source\9.maptool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_maptool\source\maptool_example_senior.cpp">
+      <Filter>source\9.maptool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

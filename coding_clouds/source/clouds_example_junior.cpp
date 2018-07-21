@@ -3,9 +3,13 @@
 #include <resource.hpp>
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_JUNIOR_DECLARE(MISSION_NAME, 0, "모든 요소를 준비")
+#define LEVEL_NUMBER LEVEL_JUNIOR
 
-static float STEP_FUNC(0, OnTickScroll)(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec)
+////////////////////////////////////////////////////////////////////////////////
+#define STEP_NUMBER 0
+MISSION_DECLARE("모든 요소를 준비")
+
+STEP_API(float OnTickScroll)(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec)
 {
 	if(grabbed_cloud)
 	{
@@ -17,27 +21,28 @@ static float STEP_FUNC(0, OnTickScroll)(Point& actor_pos, Point& actor_vec, cons
 	return 0.002;
 }
 
-static Rect STEP_FUNC(0, OnAddCloud)(float& skywidth)
+STEP_API(Rect OnAddCloud)(float& skywidth)
 {
 	return Rect(0.4, 0.4, 0.6, 0.6);
 }
 
-static void STEP_FUNC(0, OnRenderCloud)(ZayPanel& panel)
+STEP_API(void OnRenderCloud)(ZayPanel& panel)
 {
 	ZAY_RGB(panel, 128, 128, 128)
 		panel.circle();
 }
 
-static void STEP_FUNC(0, OnRenderActor)(ZayPanel& panel, const Point* grabbed_cloud)
+STEP_API(void OnRenderActor)(ZayPanel& panel, const Point* grabbed_cloud)
 {
 	ZAY_RGB(panel, 0, 0, 255)
 		panel.circle();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_JUNIOR_DECLARE(MISSION_NAME, 1, "구름의 타입을 4개로")
+#define STEP_NUMBER 1
+MISSION_DECLARE("구름의 타입을 4개로")
 
-static Rect STEP_FUNC(1, OnAddCloud)(float& skywidth)
+STEP_API(Rect OnAddCloud)(float& skywidth)
 {
 	skywidth = 0.25;
 	switch(Platform::Utility::Random() % 4)
@@ -51,9 +56,10 @@ static Rect STEP_FUNC(1, OnAddCloud)(float& skywidth)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_JUNIOR_DECLARE(MISSION_NAME, 2, "구름을 이쁘게")
+#define STEP_NUMBER 2
+MISSION_DECLARE("구름을 이쁘게")
 
-static void STEP_FUNC(2, OnRenderCloud)(ZayPanel& panel)
+STEP_API(void OnRenderCloud)(ZayPanel& panel)
 {
 	ZAY_RGB(panel, 128, 128, 128)
 	{
@@ -66,9 +72,10 @@ static void STEP_FUNC(2, OnRenderCloud)(ZayPanel& panel)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_JUNIOR_DECLARE(MISSION_NAME, 3, "구름줄을 표현")
+#define STEP_NUMBER 3
+MISSION_DECLARE("구름줄을 표현")
 
-static void STEP_FUNC(3, OnRenderActor)(ZayPanel& panel, const Point* grabbed_cloud)
+STEP_API(void OnRenderActor)(ZayPanel& panel, const Point* grabbed_cloud)
 {
 	if(grabbed_cloud)
 	{
@@ -82,12 +89,13 @@ static void STEP_FUNC(3, OnRenderActor)(ZayPanel& panel, const Point* grabbed_cl
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_JUNIOR_DECLARE(MISSION_NAME, 4, "구름을 잡아보자")
+#define STEP_NUMBER 4
+MISSION_DECLARE("구름을 잡아보자")
 
 static bool NeedCalc = true;
 static float FirstDistance = 0;
 
-static float STEP_FUNC(4, OnTickScroll)(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec)
+STEP_API(float OnTickScroll)(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec)
 {
 	if(grabbed_cloud)
 	{
@@ -108,11 +116,12 @@ static float STEP_FUNC(4, OnTickScroll)(Point& actor_pos, Point& actor_vec, cons
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_JUNIOR_DECLARE(MISSION_NAME, 5, "흔들흔들")
+#define STEP_NUMBER 5
+MISSION_DECLARE("흔들흔들")
 
 static Point OldActorPos;
 
-static float STEP_FUNC(5, OnTickScroll)(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec)
+STEP_API(float OnTickScroll)(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec)
 {
 	if(grabbed_cloud)
 	{
@@ -136,9 +145,10 @@ static float STEP_FUNC(5, OnTickScroll)(Point& actor_pos, Point& actor_vec, cons
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_JUNIOR_DECLARE(MISSION_NAME, 6, "2초만에 구름까지")
+#define STEP_NUMBER 6
+MISSION_DECLARE("2초만에 구름까지")
 
-static float STEP_FUNC(6, OnTickScroll)(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec)
+STEP_API(float OnTickScroll)(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec)
 {
 	if(grabbed_cloud)
 	{
@@ -174,13 +184,13 @@ float CloudsExample::Junior::OnTickScroll(Point& actor_pos, Point& actor_vec, co
 {
 	switch(gStep)
 	{
-	case 6: return OnTickScroll_STEP6(actor_pos, actor_vec, grabbed_cloud, grabbed_sec); break;
-	case 5: return OnTickScroll_STEP5(actor_pos, actor_vec, grabbed_cloud, grabbed_sec); break;
-	case 4: return OnTickScroll_STEP4(actor_pos, actor_vec, grabbed_cloud, grabbed_sec); break;
+	case 6: return STEP_API_CALL(6, OnTickScroll)(actor_pos, actor_vec, grabbed_cloud, grabbed_sec); break;
+	case 5: return STEP_API_CALL(5, OnTickScroll)(actor_pos, actor_vec, grabbed_cloud, grabbed_sec); break;
+	case 4: return STEP_API_CALL(4, OnTickScroll)(actor_pos, actor_vec, grabbed_cloud, grabbed_sec); break;
 	case 3:
 	case 2:
 	case 1:
-	case 0: return OnTickScroll_STEP0(actor_pos, actor_vec, grabbed_cloud, grabbed_sec); break;
+	case 0: return STEP_API_CALL(0, OnTickScroll)(actor_pos, actor_vec, grabbed_cloud, grabbed_sec); break;
 	}
 	return 0;
 }
@@ -194,8 +204,8 @@ Rect CloudsExample::Junior::OnAddCloud(float& skywidth)
 	case 4:
 	case 3:
 	case 2:
-	case 1: return OnAddCloud_STEP1(skywidth); break;
-	case 0: return OnAddCloud_STEP0(skywidth); break;
+	case 1: return STEP_API_CALL(1, OnAddCloud)(skywidth); break;
+	case 0: return STEP_API_CALL(0, OnAddCloud)(skywidth); break;
 	}
 	return Rect();
 }
@@ -208,9 +218,9 @@ void CloudsExample::Junior::OnRenderCloud(ZayPanel& panel)
 	case 5:
 	case 4:
 	case 3:
-	case 2: return OnRenderCloud_STEP2(panel); break;
+	case 2: return STEP_API_CALL(2, OnRenderCloud)(panel); break;
 	case 1:
-	case 0: return OnRenderCloud_STEP0(panel); break;
+	case 0: return STEP_API_CALL(0, OnRenderCloud)(panel); break;
 	}
 }
 
@@ -221,9 +231,9 @@ void CloudsExample::Junior::OnRenderActor(ZayPanel& panel, const Point* grabbed_
 	case 6:
 	case 5:
 	case 4:
-	case 3: return OnRenderActor_STEP3(panel, grabbed_cloud); break;
+	case 3: return STEP_API_CALL(3, OnRenderActor)(panel, grabbed_cloud); break;
 	case 2:
 	case 1:
-	case 0: return OnRenderActor_STEP0(panel, grabbed_cloud); break;
+	case 0: return STEP_API_CALL(0, OnRenderActor)(panel, grabbed_cloud); break;
 	}
 }

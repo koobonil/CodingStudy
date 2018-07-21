@@ -25,6 +25,29 @@ void Example::SetStep(int step)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+MissionComment::MissionComment()
+{
+	mLine = 0;
+}
+
+MissionComment::~MissionComment()
+{
+}
+
+MissionComment::MissionComment(MissionComment&& rhs)
+{
+	operator=(ToReference(rhs));
+}
+
+MissionComment& MissionComment::operator=(MissionComment&& rhs)
+{
+	mSubject = rhs.mSubject;
+	mFile = rhs.mFile;
+	mLine = rhs.mLine;
+    return *this;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 MissionElement::MissionElement()
 {
 	mExample = nullptr;
@@ -45,6 +68,7 @@ void MissionElement::SetLevel(sint32 level)
 		mExampleLevel = level;
 		mExampleStep = 0;
 		mExampleStepCount = mExample->SetLevel(level);
+		UpdateComment();
 	}
 }
 
@@ -54,13 +78,40 @@ void MissionElement::SetStep(sint32 step)
 	{
 		mExampleStep = step;
 		mExample->SetStep(step);
+		UpdateComment();
 	}
+}
+
+void MissionElement::UpdateComment()
+{
+	if(mExampleStep < mComments[mExampleLevel].Count())
+	{
+		const auto& Comment = mComments[mExampleLevel][mExampleStep];
+		if(0 < Comment.mFile.Length())
+		{
+			if(id_file_read TextFile = Platform::File::OpenForRead(Comment.mFile))
+			{
+				const sint32 TextSize = Platform::File::Size(TextFile);
+				chararray TextWords;
+				Platform::File::Read(TextFile, (uint08*) TextWords.AtDumping(0, TextSize + 1), TextSize);
+				TextWords.At(TextSize) = '\0';
+				Platform::File::Close(TextFile);
+				UpdateCommentCore(&TextWords[0]);
+			}
+			else mExampleCode = "";
+		}
+	}
+}
+
+void MissionElement::UpdateCommentCore(chars code)
+{
+	mExampleCode = code;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 autorun MissionCollector::AddMission(chars name, chars view, Example* example)
 {
-	auto& CurElement = MissionData::ST().mElements(name);
+	auto& CurElement = MissionData::ST().GetElement(name);
 	BOSS_ASSERT("동일한 이름의 미션이 존재합니다", CurElement.mName.Length() == 0);
 	CurElement.mName = name;
 	CurElement.mView = view;
@@ -73,17 +124,22 @@ autorun MissionCollector::AddMission(chars name, chars view, Example* example)
 	return true;
 }
 
-autorun MissionCollector::AddComment(chars name, sint32 level, sint32 step, chars comment)
+autorun MissionCollector::AddComment(chars name, sint32 level, sint32 step, chars subject, chars file, sint32 line)
 {
-	auto& CurElement = MissionData::ST().mElements(name);
-	CurElement.mComments[level].AtWherever(step) = comment;
+	auto& CurElement = MissionData::ST().GetElement(name);
+	auto& NewComment = CurElement.mComments[level].AtWherever(step);
+	NewComment.mSubject = subject;
+	NewComment.mFile = file;
+	NewComment.mLine = line;
 	return true;
 }
 
 MissionElement* MissionCollector::FocusedMission()
 {
-	const String FocusName = MissionData::ST().mFocus;
-	return MissionData::ST().mElements.Access(FocusName);
+	const String FocusName = MissionData::ST().focus();
+	if(0 < FocusName.Length())
+		return &MissionData::ST().GetElement(FocusName);
+	return nullptr;
 }
 
 void MissionCollector::RenderUI(ZayPanel& panel)
@@ -106,6 +162,28 @@ void MissionCollector::RenderUI(ZayPanel& panel)
 			}
 		}
 	#endif
+}
+
+////////////////////////////////////////////////////////////////////////////////
+MissionElement& MissionData::GetElement(chars name)
+{
+	return mElements(name);
+}
+
+Map<MissionElement>& MissionData::elements()
+{
+	return mElements;
+}
+
+void MissionData::SetFocus(chars name)
+{
+	mElements(name).UpdateComment();
+	mFocus = name;
+}
+
+chars MissionData::focus() const
+{
+	return mFocus;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

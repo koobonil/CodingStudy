@@ -3,7 +3,11 @@
 #include <resource.hpp>
 
 ////////////////////////////////////////////////////////////////////////////////
-MISSION_SENIOR_DECLARE(MISSION_NAME, 0, "STEP_0")
+#define LEVEL_NUMBER LEVEL_SENIOR
+
+////////////////////////////////////////////////////////////////////////////////
+#define STEP_NUMBER 0
+MISSION_DECLARE("STEP_0")
 
 float CloudsExample::Senior::OnTickScroll(Point& actor_pos, Point& actor_vec, const Point* grabbed_cloud, float grabbed_sec)
 {
