@@ -92,6 +92,14 @@ SOURCES += ../../coding_maptool/source/maptool_example_beginner.cpp
 SOURCES += ../../coding_maptool/source/maptool_example_junior.cpp
 SOURCES += ../../coding_maptool/source/maptool_example_senior.cpp
 
+SOURCES += ../../coding_eventtool/source/eventtool.cpp
+HEADERS += ../../coding_eventtool/source/eventtool.hpp
+SOURCES += ../../coding_eventtool/source/eventtool_example.cpp
+HEADERS += ../../coding_eventtool/source/eventtool_example.hpp
+SOURCES += ../../coding_eventtool/source/eventtool_example_beginner.cpp
+SOURCES += ../../coding_eventtool/source/eventtool_example_junior.cpp
+SOURCES += ../../coding_eventtool/source/eventtool_example_senior.cpp
+
 ASSETS_IMAGE.files += ../assets/image
 ASSETS_IMAGE.path = /assets
 

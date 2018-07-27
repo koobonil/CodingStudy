@@ -34,6 +34,9 @@
     <Filter Include="source\9.maptool">
       <UniqueIdentifier>{6b4e7098-c36e-4705-81a6-9b30b1edbf95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\10.eventtool">
+      <UniqueIdentifier>{d2e0765c-318c-4886-9faa-844280d30f9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\common\windows\main.aps">
@@ -122,6 +125,12 @@
     </ClInclude>
     <ClInclude Include="..\..\coding_maptool\source\maptool_example.hpp">
       <Filter>source\9.maptool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_eventtool\source\eventtool.hpp">
+      <Filter>source\10.eventtool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\coding_eventtool\source\eventtool_example.hpp">
+      <Filter>source\10.eventtool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +286,21 @@
     </ClCompile>
     <ClCompile Include="..\..\coding_maptool\source\maptool_example_senior.cpp">
       <Filter>source\9.maptool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_eventtool\source\eventtool.cpp">
+      <Filter>source\10.eventtool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_eventtool\source\eventtool_example.cpp">
+      <Filter>source\10.eventtool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_eventtool\source\eventtool_example_beginner.cpp">
+      <Filter>source\10.eventtool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_eventtool\source\eventtool_example_junior.cpp">
+      <Filter>source\10.eventtool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\coding_eventtool\source\eventtool_example_senior.cpp">
+      <Filter>source\10.eventtool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

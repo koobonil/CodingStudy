@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{5c61e721-a50e-4103-9859-c4c48d6b4d42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{63ca831b-57ca-44d0-b144-7784b657e4da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\missioncoding">
+      <UniqueIdentifier>{a9f60b21-3a8c-4b9d-a011-fb8876f8ae55}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\common\windows\main.aps">
+      <Filter>resource</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\common\windows\main.ico">
+      <Filter>resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\common\windows\main.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\boss_config.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\eventtool.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\resource.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\eventtool_example.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\missioncoding\source\classes.hpp">
+      <Filter>source\missioncoding</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\eventtool.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\resource.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\eventtool_example.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\eventtool_example_beginner.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\eventtool_example_junior.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\eventtool_example_senior.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\missioncoding\source\classes.cpp">
+      <Filter>source\missioncoding</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -238,7 +238,7 @@ void SyncuClient::Resize(sint32 width, sint32 height)
 
 void SyncuClient::CheckMessage()
 {
-	sint32 Length = Platform::Socket::RecvAvailable(mSocket, 10);
+	sint32 Length = Platform::Socket::RecvAvailable(mSocket);
 	while (0 < Length)
 	{
 		uint08 ReadBuffer[1024];
