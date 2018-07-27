@@ -84,13 +84,13 @@ SOURCES += ../../coding_cars/source/cars_example_beginner.cpp
 SOURCES += ../../coding_cars/source/cars_example_junior.cpp
 SOURCES += ../../coding_cars/source/cars_example_senior.cpp
 
-SOURCES += ../../coding_cars/source/maptool.cpp
-HEADERS += ../../coding_cars/source/maptool.hpp
-SOURCES += ../../coding_cars/source/maptool_example.cpp
-HEADERS += ../../coding_cars/source/maptool_example.hpp
-SOURCES += ../../coding_cars/source/maptool_example_beginner.cpp
-SOURCES += ../../coding_cars/source/maptool_example_junior.cpp
-SOURCES += ../../coding_cars/source/maptool_example_senior.cpp
+SOURCES += ../../coding_maptool/source/maptool.cpp
+HEADERS += ../../coding_maptool/source/maptool.hpp
+SOURCES += ../../coding_maptool/source/maptool_example.cpp
+HEADERS += ../../coding_maptool/source/maptool_example.hpp
+SOURCES += ../../coding_maptool/source/maptool_example_beginner.cpp
+SOURCES += ../../coding_maptool/source/maptool_example_junior.cpp
+SOURCES += ../../coding_maptool/source/maptool_example_senior.cpp
 
 ASSETS_IMAGE.files += ../assets/image
 ASSETS_IMAGE.path = /assets
