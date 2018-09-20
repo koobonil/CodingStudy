@@ -190,7 +190,7 @@ chars MissionData::focus() const
 SyncuClient::SyncuClient(chars name)
 {
 	mSocket = Platform::Socket::OpenForTcp();
-	Platform::Socket::Connect(mSocket, "www.finalbossbehindthedoor.com", 10125);
+	Platform::Socket::Connect(mSocket, "www.geegeepms.com", 10125);
 
 	mProjectName = name;
 	String SHCodeJson = String::FromAsset(String::Format("shcode_%s.json", (chars) mProjectName));

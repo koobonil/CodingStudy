@@ -95,7 +95,7 @@ ZAY_VIEW_API OnRender(ZayPanel& panel)
         ZAY_LTRB(panel, 0, panel.h() * 0.6, panel.w(), panel.h())
         {
             ZAY_RGBA(panel, 0, 0, 0, 64)
-                panel.text("www.FinalBossBehindTheDoor.com", UIFA_CenterBottom);
+                panel.text("www.GeeGeePms.com", UIFA_CenterBottom);
             // 선택
             ZAY_XYRR(panel, panel.w() / 2, panel.h() * 1 / 3, BaseSize / 3, BaseSize / 20)
             {
@@ -187,7 +187,7 @@ syncuData::~syncuData()
 syncuObject::syncuObject()
 {
     mSocket = Platform::Socket::OpenForTcp();
-    Platform::Socket::Connect(mSocket, "www.finalbossbehindthedoor.com", 10125);
+    Platform::Socket::Connect(mSocket, "www.geegeepms.com", 10125);
     mSHCode = Platform::Option::GetText("SHCode");
     mLastIDX = -1;
     mEvent.At("type").Set("event_from_connecter");
