@@ -17,6 +17,10 @@ void EventToolExample::OnQuit(Context& doc)
 {
 }
 
+void EventToolExample::OnKey(Key key, Context& doc)
+{
+}
+
 void EventToolExample::OnRender(ZayPanel& panel, Context& doc)
 {
 }

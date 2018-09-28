@@ -35,7 +35,7 @@
       <UniqueIdentifier>{6b4e7098-c36e-4705-81a6-9b30b1edbf95}</UniqueIdentifier>
     </Filter>
     <Filter Include="source\10.eventtool">
-      <UniqueIdentifier>{d2e0765c-318c-4886-9faa-844280d30f9c}</UniqueIdentifier>
+      <UniqueIdentifier>{d172891a-5135-492a-86e4-614974dc7c50}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +287,9 @@
     <ClCompile Include="..\..\coding_maptool\source\maptool_example_senior.cpp">
       <Filter>source\9.maptool</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\coding_eventtool\source\eventtool_example_senior.cpp">
+      <Filter>source\10.eventtool</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\coding_eventtool\source\eventtool.cpp">
       <Filter>source\10.eventtool</Filter>
     </ClCompile>
@@ -297,9 +300,6 @@
       <Filter>source\10.eventtool</Filter>
     </ClCompile>
     <ClCompile Include="..\..\coding_eventtool\source\eventtool_example_junior.cpp">
-      <Filter>source\10.eventtool</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\coding_eventtool\source\eventtool_example_senior.cpp">
       <Filter>source\10.eventtool</Filter>
     </ClCompile>
   </ItemGroup>

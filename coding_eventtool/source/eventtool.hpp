@@ -9,4 +9,6 @@ public:
 
 public:
     Context mDoc;
+    sint32 mKeyCode;
+    uint64 mTickMsec;
 };

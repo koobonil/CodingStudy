@@ -4,7 +4,7 @@
 
 #include <resource.hpp>
 
-void PlatformInit()
+bool PlatformInit()
 {
     Platform::InitForGL();
     Platform::SetViewCreator(ZayView::Creator);
@@ -49,6 +49,7 @@ void PlatformInit()
                 }
             }
         });
+    return true;
 }
 
 void PlatformQuit()

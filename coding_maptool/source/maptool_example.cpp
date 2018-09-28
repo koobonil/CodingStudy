@@ -19,7 +19,7 @@ void MapToolExample::OnInit(Context& doc)
 		Tile[i].SetName(Name).Load();
 	}
 
-	String Json = String::FromAsset("save.json");
+	String Json = String::FromAsset("mapdata.json");
 	if(Json.Length() == 0)
 	{
 		for(int y = 0; y < 10; ++y)
@@ -31,7 +31,7 @@ void MapToolExample::OnInit(Context& doc)
 
 void MapToolExample::OnQuit(Context& doc)
 {
-	doc.SaveJson().ToAsset("save.json");
+	doc.SaveJson().ToAsset("mapdata.json");
 }
 
 int LastTile = 0;
