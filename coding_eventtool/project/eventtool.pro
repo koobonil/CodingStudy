@@ -24,6 +24,8 @@ HEADERS += ../../missioncoding/source/classes.hpp
 
 ASSETS_IMAGE.files += ../assets/image
 ASSETS_IMAGE.path = /assets
+ASSETS_TILE.files += ../assets/tile
+ASSETS_TILE.path = /assets
 
 win32{
     RC_ICONS += ../common/windows/main.ico
@@ -31,6 +33,7 @@ win32{
 
 macx{
     QMAKE_BUNDLE_DATA += ASSETS_IMAGE
+    QMAKE_BUNDLE_DATA += ASSETS_TILE
     QMAKE_INFO_PLIST = $$PWD/../common/macx/Info.plist
     QMAKE_ASSET_CATALOGS += $$PWD/../common/macx/Assets.xcassets
     QMAKE_ASSET_CATALOGS_APP_ICON = AppIcon
@@ -38,6 +41,7 @@ macx{
 
 ios{
     QMAKE_BUNDLE_DATA += ASSETS_IMAGE
+    QMAKE_BUNDLE_DATA += ASSETS_TILE
     QMAKE_INFO_PLIST = $$PWD/../common/ios/Info.plist
     QMAKE_ASSET_CATALOGS += $$PWD/../common/ios/Assets.xcassets
     QMAKE_ASSET_CATALOGS_APP_ICON = AppIcon
@@ -45,5 +49,6 @@ ios{
 
 android{
     INSTALLS += ASSETS_IMAGE
+    INSTALLS += ASSETS_TILE
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/../common/android
 }
