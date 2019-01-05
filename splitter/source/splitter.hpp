@@ -310,6 +310,104 @@ private:
     sint32 mConnecterPeerID;
 };
 
+class RoleChatting : public Role
+{
+    typedef Map<RoleChatting*> Room;
+    static Tree<Room>& AllRoom()
+    {static Tree<Room> _; return _;}
+
+    static void AddPeer(chars room, RoleChatting* peer)
+    {
+        auto CurRoom = AllRoom()(room).Value();
+        if(!CurRoom) // 없으면 트리생성
+            CurRoom = AllRoom()(room).CreateValue();
+        CurRoom->AtAdding() = peer;
+    }
+    static void SubPeer(chars room, RoleChatting* peer)
+    {
+        if(auto CurRoom = AllRoom()(room).Value())
+        {
+            // 해당 피어를 비운뒤
+            for(sint32 i = 0, iend = CurRoom->Count(); i < iend; ++i)
+                if(*CurRoom->Access(i) == peer)
+                {
+                    *CurRoom->Access(i) = nullptr;
+                    break;
+                }
+            // 후위부터 맵정리
+            for(sint32 i = CurRoom->Count() - 1; 0 <= i; --i)
+            {
+                if(*CurRoom->Access(i) != nullptr)
+                    break;
+                CurRoom->Remove(i);
+            }
+            // 트리정리
+            if(CurRoom->Count() == 0)
+                AllRoom().Remove(room);
+        }
+    }
+    static void SendToPeers(chars room, const Context& msg)
+    {
+        if(auto CurRoom = AllRoom()(room).Value())
+        {
+            for(sint32 i = 0, iend = CurRoom->Count(); i < iend; ++i)
+            {
+                if(auto CurPeer = *CurRoom->Access(i))
+                    Global::Send(CurPeer->mConnecterPeerID, msg);
+            }
+        }
+    }
+
+private:
+    RoleChatting()
+    {
+        mConnecterPeerID = -1;
+    }
+    ~RoleChatting() {TryLeave();}
+
+public:
+    static Role* Create()
+    {
+        return new RoleChatting();
+    }
+
+private:
+    void DestroyMe() override
+    {
+        delete this;
+    }
+    String GetStatus() const override
+    {
+        return String::Format("%s/Chatting: %s", (chars) mRoomID, "noname");
+    }
+    bool OnMessage(chars type, Context& json, sint32 peerid) override
+    {
+        if(!String::Compare(type, "chat"))
+        {
+            String NewRoomID = json("room").GetString("global");
+            if(!!mRoomID.Compare(NewRoomID))
+            {
+                SubPeer(mRoomID, this);
+                AddPeer(mRoomID = NewRoomID, this);
+            }
+            mConnecterPeerID = peerid;
+            SendToPeers(mRoomID, json);
+            return true;
+        }
+        return false;
+    }
+
+private:
+    void TryLeave()
+    {
+        SubPeer(mRoomID, this);
+    }
+
+private:
+    String mRoomID;
+    sint32 mConnecterPeerID;
+};
+
 ////////////////////////////////////////////////////////////////////////////////
 // Scroll
 ////////////////////////////////////////////////////////////////////////////////
@@ -571,6 +669,8 @@ private:
                 mPeerRole = RoleProcess::Create();
             else if(!String::Compare(Type, "event_from_connecter"))
                 mPeerRole = RoleConnecter::Create();
+            else if(!String::Compare(Type, "chat"))
+                mPeerRole = RoleChatting::Create();
         }
         if(mPeerRole)
             return mPeerRole->OnMessage(Type, json, mPeerID);

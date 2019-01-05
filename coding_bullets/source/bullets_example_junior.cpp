@@ -9,11 +9,12 @@
 #define STEP_NUMBER 0
 MISSION_DECLARE("STEP_0")
 
-int BulletsExample::Junior::OnAdd(float& x, float& y)
+int BulletsExample::Junior::OnAdd(float& x, float& y, float& r)
 {
 	static sint32 Count = 0;
 	x = (Platform::Utility::Random() % 400) - 200.0f;
     y = (Platform::Utility::Random() % 400) - 200.0f;
+    r = 10;
     return (++Count < 30)? 20 : -1;
 }
 
@@ -34,20 +35,22 @@ int BulletsExample::Junior::OnAct(int& type, float& vx, float& vy)
     return 0;
 }
 
+Eff BulletsExample::Junior::OnEff(int type)
+{
+    return Eff::LINEUP;
+}
+
 void BulletsExample::Junior::OnRender(ZayPanel& panel, int type)
 {
-    ZAY_XYRR(panel, 0, 0, 10, 10)
+    if(type == 1)
     {
-        if(type == 1)
-        {
-            ZAY_RGBA(panel, 128, 0, 128, 224)
-				panel.circle();
-        }
-        else
-        {
-            ZAY_RGBA(panel, 224, 255, 0, 224)
-				panel.fill();
-        }
+        ZAY_RGBA(panel, 128, 0, 128, 224)
+			panel.circle();
+    }
+    else
+    {
+        ZAY_RGBA(panel, 224, 255, 0, 224)
+			panel.fill();
     }
 }
 
