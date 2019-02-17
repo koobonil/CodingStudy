@@ -350,10 +350,14 @@ class RoleChatting : public Role
     {
         if(auto CurRoom = AllRoom()(room).Value())
         {
+            chars To = msg("to").GetString(nullptr);
             for(sint32 i = 0, iend = CurRoom->Count(); i < iend; ++i)
             {
                 if(auto CurPeer = *CurRoom->Access(i))
-                    Global::Send(CurPeer->mConnecterPeerID, msg);
+                {
+                    if(To == nullptr || !CurPeer->mName.Compare(To))
+                        Global::Send(CurPeer->mConnecterPeerID, msg);
+                }
             }
         }
     }
@@ -390,6 +394,10 @@ private:
                 SubPeer(mRoomID, this);
                 AddPeer(mRoomID = NewRoomID, this);
             }
+
+            if(chars NewName = json("name").GetString(nullptr))
+                mName = NewName;
+
             mConnecterPeerID = peerid;
             SendToPeers(mRoomID, json);
             return true;
@@ -405,6 +413,7 @@ private:
 
 private:
     String mRoomID;
+    String mName;
     sint32 mConnecterPeerID;
 };
 
@@ -634,7 +643,7 @@ public:
     bool AddMessage(bytes data, sint32 size) override
     {
         bool UpdateScreen = false;
-        mMessage.Add((chars) data, size);
+        mMessage.AddTail((chars) data, size);
         static const String JsonBegin("#json begin");
         static const String JsonEnd("#json end");
         sint32 BeginPos = 0, EndPos = 0;

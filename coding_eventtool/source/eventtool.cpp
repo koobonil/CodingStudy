@@ -7,32 +7,7 @@ ZAY_DECLARE_VIEW_CLASS("eventtoolView", eventtoolData)
 
 ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_share* out)
 {
-    if(type == CT_Signal)
-    {
-        sint32 KeyType = 0;
-		branch;
-		jump(!String::Compare(topic, "KeyPress")) KeyType = 1;
-		jump(!String::Compare(topic, "KeyRelease")) KeyType = 2;
-        if(0 < KeyType)
-        {
-            pointers KeyPtr(in);
-            sint32 KeyCode = *((sint32*) KeyPtr[0]);
-		    if(KeyType == 1)
-            {
-                if(m->mKeyCode != KeyCode)
-                    m->mKeyCode = KeyCode;
-            }
-            else if(KeyType == 2)
-            {
-                if(m->mKeyCode == KeyCode)
-                {
-                    m->mKeyCode = 0;
-                    m->mTickMsec = 0;
-                }
-            }
-        }
-    }
-    else if(type == CT_Tick)
+    if(type == CT_Tick)
     {
         if(m->mKeyCode != 0)
         if(m->mTickMsec + 100 < Platform::Utility::CurrentTimeMsec())
@@ -50,8 +25,26 @@ ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_sha
     }
 }
 
-ZAY_VIEW_API OnNotify(chars sender, chars topic, id_share in, id_cloned_share* out)
+ZAY_VIEW_API OnNotify(NotifyType type, chars topic, id_share in, id_cloned_share* out)
 {
+    if(type == NT_KeyPress || type == NT_KeyRelease)
+    {
+        const sint32 KeyType = (type == NT_KeyPress)? 1 : 2;
+        const sint32 KeyCode = sint32o(in).ConstValue();
+		if(KeyType == 1)
+        {
+            if(m->mKeyCode != KeyCode)
+                m->mKeyCode = KeyCode;
+        }
+        else if(KeyType == 2)
+        {
+            if(m->mKeyCode == KeyCode)
+            {
+                m->mKeyCode = 0;
+                m->mTickMsec = 0;
+            }
+        }
+    }
 }
 
 ZAY_VIEW_API OnGesture(GestureType type, sint32 x, sint32 y)

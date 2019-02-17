@@ -79,53 +79,46 @@ ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_sha
 			}
 		}
 	}
-	else if(type == CT_Signal)
-	{
-		sint32 KeyType = 0;
-		branch;
-		jump(!String::Compare(topic, "KeyPress")) KeyType = 1;
-		jump(!String::Compare(topic, "KeyRelease")) KeyType = 2;
-		if(0 < KeyType)
-		{
-			auto& CurCar = m->mCars("MY");
-			pointers Key(in);
-			sint32 KeyCode = *((sint32*) Key[0]);
-			if(KeyType == 2)
-			{
-				CurCar.mKeyPressMap.Remove(KeyCode);
-				if(CurCar.mKeyPressMap.Count() == 0)
-					CurCar.mDegreeCancelOnce = true;
-			}
-			else if(KeyCode == ' ') // Space
-			{
-				CurCar.mFart = 0;
-				CurCar.mButton1Once = true;
-			}
-			else if(KeyCode == 0x01000004) // Enter
-				CurCar.mButton2Once = true;
-			else
-			{
-				switch(KeyCode)
-				{
-				case 'A': CurCar.mDegree = 315; break; // Left
-				case 'W': CurCar.mDegree = 45; break; // Up
-				case 'D': CurCar.mDegree = 135; break; // Right
-				case 'S': CurCar.mDegree = 225; break; // Down
-				case 0x01000012: CurCar.mDegree = 315; break; // Left
-				case 0x01000013: CurCar.mDegree = 45; break; // Up
-				case 0x01000014: CurCar.mDegree = 135; break; // Right
-				case 0x01000015: CurCar.mDegree = 225; break; // Down
-				default: return;
-				}
-				CurCar.mDegreeCancelOnce = false;
-				CurCar.mKeyPressMap[KeyCode] = KeyCode;
-			}
-		}
-	}
 }
 
-ZAY_VIEW_API OnNotify(chars sender, chars topic, id_share in, id_cloned_share* out)
+ZAY_VIEW_API OnNotify(NotifyType type, chars topic, id_share in, id_cloned_share* out)
 {
+    if(type == NT_KeyPress || type == NT_KeyRelease)
+	{
+		const sint32 KeyType = (type == NT_KeyPress)? 1 : 2;
+		auto& CurCar = m->mCars("MY");
+		const sint32 KeyCode = sint32o(in).ConstValue();
+		if(KeyType == 2)
+		{
+			CurCar.mKeyPressMap.Remove(KeyCode);
+			if(CurCar.mKeyPressMap.Count() == 0)
+				CurCar.mDegreeCancelOnce = true;
+		}
+		else if(KeyCode == ' ') // Space
+		{
+			CurCar.mFart = 0;
+			CurCar.mButton1Once = true;
+		}
+		else if(KeyCode == 0x01000004) // Enter
+			CurCar.mButton2Once = true;
+		else
+		{
+			switch(KeyCode)
+			{
+			case 'A': CurCar.mDegree = 315; break; // Left
+			case 'W': CurCar.mDegree = 45; break; // Up
+			case 'D': CurCar.mDegree = 135; break; // Right
+			case 'S': CurCar.mDegree = 225; break; // Down
+			case 0x01000012: CurCar.mDegree = 315; break; // Left
+			case 0x01000013: CurCar.mDegree = 45; break; // Up
+			case 0x01000014: CurCar.mDegree = 135; break; // Right
+			case 0x01000015: CurCar.mDegree = 225; break; // Down
+			default: return;
+			}
+			CurCar.mDegreeCancelOnce = false;
+			CurCar.mKeyPressMap[KeyCode] = KeyCode;
+		}
+	}
 }
 
 ZAY_VIEW_API OnGesture(GestureType type, sint32 x, sint32 y)
@@ -179,7 +172,7 @@ carsData::carsData() : SyncuClient("cars")
 	{
 		if(i < NewTiles.Length())
 			CurTile[0] = NewTiles[i];
-		mTiles.Add(CurTile);
+		mTiles.AddTail(CurTile);
 	}
 	OnVisit("MY");
 }

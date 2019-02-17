@@ -14,9 +14,9 @@ bool PlatformInit()
 
 	auto Policy = Platform::CreatePolicy(200, 200);
 	auto LevelView = Platform::CreateView("Level", 200, 200, Policy, "levelView");
-	auto LevelDock = Platform::CreateDock(LevelView, UIA_Right);
+	auto LevelDock = Platform::CreateDock(LevelView, UID_Right);
 	auto FunctionView = Platform::CreateView("Function", 200, 200, Policy, "functionView");
-	auto FunctionDock = Platform::CreateDock(FunctionView, UIA_Bottom);
+	auto FunctionDock = Platform::CreateDock(FunctionView, UID_Bottom);
 
     String InfoString = String::FromAsset("windowinfo.json");
     if(0 < InfoString.Length())

@@ -61,48 +61,41 @@ ZAY_VIEW_API OnCommand(CommandType type, chars topic, id_share in, id_cloned_sha
 			m->mGameOver = (m->mGrabbedCloudID == -1 && m->mScreenHeight * 2 < m->mActorPos.y);
 		}
 	}
-	else if(type == CT_Signal)
-	{
-		sint32 KeyType = 0;
-		branch;
-		jump(!String::Compare(topic, "KeyPress")) KeyType = 1;
-		jump(!String::Compare(topic, "KeyRelease")) KeyType = 2;
-		if(0 < KeyType)
-		{
-			/*auto& CurAirplane = m->mAirplanes("MY");
-			pointers Key(in);
-			sint32 KeyCode = *((sint32*) Key[0]);
-			if(KeyType == 2)
-			{
-				CurAirplane.mKeyPressMap.Remove(KeyCode);
-				if(CurAirplane.mKeyPressMap.Count() == 0)
-					CurAirplane.mDegreeCancelOnce = true;
-			}
-			else
-			{
-				switch(KeyCode)
-				{
-				case 'A': CurAirplane.mDegree = 315; break; // Left
-				case 'W': CurAirplane.mDegree = 45; break; // Top
-				case 'D': CurAirplane.mDegree = 135; break; // Right
-				case 'S': CurAirplane.mDegree = 225; break; // Bottom
-				}
-				switch(KeyCode)
-				{
-				case 0x01000012: CurAirplane.mDegree = 315; break; // Left
-				case 0x01000013: CurAirplane.mDegree = 45; break; // Top
-				case 0x01000014: CurAirplane.mDegree = 135; break; // Right
-				case 0x01000015: CurAirplane.mDegree = 225; break; // Bottom
-				}
-				CurAirplane.mDegreeCancelOnce = false;
-				CurAirplane.mKeyPressMap[KeyCode] = KeyCode;
-			}*/
-		}
-	}
 }
 
-ZAY_VIEW_API OnNotify(chars sender, chars topic, id_share in, id_cloned_share* out)
+ZAY_VIEW_API OnNotify(NotifyType type, chars topic, id_share in, id_cloned_share* out)
 {
+    if(type == NT_KeyPress || type == NT_KeyRelease)
+	{
+		const sint32 KeyType = (type == NT_KeyPress)? 1 : 2;
+		/*auto& CurAirplane = m->mAirplanes("MY");
+		const sint32 KeyCode = sint32o(in).ConstValue();
+		if(KeyType == 2)
+		{
+			CurAirplane.mKeyPressMap.Remove(KeyCode);
+			if(CurAirplane.mKeyPressMap.Count() == 0)
+				CurAirplane.mDegreeCancelOnce = true;
+		}
+		else
+		{
+			switch(KeyCode)
+			{
+			case 'A': CurAirplane.mDegree = 315; break; // Left
+			case 'W': CurAirplane.mDegree = 45; break; // Top
+			case 'D': CurAirplane.mDegree = 135; break; // Right
+			case 'S': CurAirplane.mDegree = 225; break; // Bottom
+			}
+			switch(KeyCode)
+			{
+			case 0x01000012: CurAirplane.mDegree = 315; break; // Left
+			case 0x01000013: CurAirplane.mDegree = 45; break; // Top
+			case 0x01000014: CurAirplane.mDegree = 135; break; // Right
+			case 0x01000015: CurAirplane.mDegree = 225; break; // Bottom
+			}
+			CurAirplane.mDegreeCancelOnce = false;
+			CurAirplane.mKeyPressMap[KeyCode] = KeyCode;
+		}*/
+	}
 }
 
 ZAY_VIEW_API OnGesture(GestureType type, sint32 x, sint32 y)

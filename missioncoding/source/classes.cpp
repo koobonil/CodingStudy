@@ -246,7 +246,7 @@ void SyncuClient::CheckMessage()
 		if (0 < ReadLength)
 		{
 			Length -= ReadLength;
-			mSocketMessage.Add((chars) ReadBuffer, ReadLength);
+			mSocketMessage.AddTail((chars) ReadBuffer, ReadLength);
 			// 버퍼연결
 			static const String JsonBegin("#json begin");
 			static const String JsonEnd("#json end");
